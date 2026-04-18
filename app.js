@@ -179,6 +179,15 @@ function renderBusinesses() {
     grid.innerHTML = businesses.map(function(b) { return '<div class="business-card"><div class="business-icon">' + b.icon + '</div><div class="business-name">' + b.name + '</div><div class="business-sales">' + b.sales + '</div></div>'; }).join('');
 }
 
+function addNewBusiness() {
+    var name = prompt('Nombre del negocio:');
+    if (name) {
+        businesses.push({ id: Date.now(), name: name, icon: '📦', sales: '0€', status: 'active' });
+        renderBusinesses();
+        saveData();
+    }
+}
+
 // KANBAN
 function renderKanban() {
     var board = document.getElementById('kanban-board');

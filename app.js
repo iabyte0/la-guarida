@@ -210,15 +210,23 @@ function closeTaskModal() {
     if (t) t.value = '';
 }
 function createTaskFromModal() {
-    var title = document.getElementById('task-title').value;
-    var desc = document.getElementById('task-desc').value;
-    var project = document.getElementById('task-project').value;
-    var status = document.getElementById('task-status').value;
-    var priority = document.getElementById('task-priority').value;
-    var agent = document.getElementById('task-agent').value;
-    var type = document.getElementById('task-type').value;
+    var titleEl = document.getElementById('task-title');
+    var title = titleEl ? titleEl.value : '';
+    var descEl = document.getElementById('task-desc');
+    var desc = descEl ? descEl.value : '';
+    var projEl = document.getElementById('task-project');
+    var project = projEl ? projEl.value : 'General';
+    var statEl = document.getElementById('task-status');
+    var status = statEl ? statEl.value : 'pendiente';
+    var prioEl = document.getElementById('task-priority');
+    var priority = prioEl ? prioEl.value : 'medium';
+    var agEl = document.getElementById('task-agent');
+    var agent = agEl ? agEl.value : 'Hanzo';
+    
     if (!title) { alert('Pon un titulo!'); return; }
-    kanbanTasks[status].push({ id: Date.now(), title: title, description: desc, project: project, priority: priority, type: type, agent: agent });
+    
+    if (!kanbanTasks[status]) kanbanTasks[status] = [];
+    kanbanTasks[status].push({ id: Date.now(), title: title, description: desc, project: project, priority: priority, agent: agent });
     log('📋 Tarea: ' + title);
     closeTaskModal();
     renderKanban();

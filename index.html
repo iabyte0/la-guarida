@@ -288,12 +288,12 @@
         </section>
     </div>
 
-    <!-- MODAL AVATAR EDITOR -->
-    <div class="modal" id="avatar-modal">
+    <!-- MODAL NUEVA TAREA -->
+    <div class="modal" id="task-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>🎨 EDITOR DE AVATARES</h2>
-                <span class="close-modal" onclick="closeModal()">✕</span>
+                <h2>📋 NUEVA TAREA</h2>
+                <span class="close-modal" onclick="closeTaskModal()">✕</span>
             </div>
             <div class="modal-body">
                 <div class="avatar-grid">
@@ -408,6 +408,101 @@
                 <div class="modal-actions">
                     <button class="btn-neon" onclick="createTaskFromModal()">✓ CREAR TAREA</button>
                     <button class="btn-small" onclick="closeTaskModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUEVO AGENTE -->
+    <div class="modal" id="agent-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛸 NUEVO AGENTE</h2>
+                <span class="close-modal" onclick="closeAgentModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="agent-name" placeholder="Nombre del agente" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <select id="agent-specialty" class="form-input">
+                        <option value="General">General</option>
+                        <option value="Analisis">Analisis</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Research">Research</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Avatar (elige emoji o sube imagen)</label>
+                    <div class="avatar-preview-box" id="new-agent-avatar-preview" style="font-size:3rem;text-align:center;padding:15px;background:#242938;border-radius:12px;margin-bottom:10px;">🦞</div>
+                    <input type="file" id="agent-avatar-upload" accept="image/*" class="form-input" style="margin-bottom:15px;" onchange="handleAgentAvatarUpload(this,'new')">
+                    <div class="emoji-grid">
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🦞', 'new')">🦞</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🧠', 'new')">🧠</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('💻', 'new')">💻</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('⭐', 'new')">⭐</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🤖', 'new')">🤖</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🐱', 'new')">🐱</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="createAgentFromModal()">✓ CREAR AGENTE</button>
+                    <button class="btn-small" onclick="closeAgentModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL EDITAR AGENTE -->
+    <div class="modal" id="edit-agent-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ EDITAR AGENTE</h2>
+                <span class="close-modal" onclick="closeEditAgentModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-agent-id">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="edit-agent-name" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <select id="edit-agent-specialty" class="form-input">
+                        <option value="General">General</option>
+                        <option value="Analisis">Analisis</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Research">Research</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Avatar (elige emoji o sube imagen)</label>
+                    <div class="avatar-preview-box" id="edit-agent-avatar-preview" style="font-size:3rem;text-align:center;padding:15px;background:#242938;border-radius:12px;margin-bottom:10px;">🦞</div>
+                    <input type="file" id="edit-agent-avatar-upload" accept="image/*" class="form-input" style="margin-bottom:15px;" onchange="handleAgentAvatarUpload(this,'edit')">
+                    <div class="emoji-grid">
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🦞', 'edit')">🦞</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🧠', 'edit')">🧠</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('💻', 'edit')">💻</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('⭐', 'edit')">⭐</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🤖', 'edit')">🤖</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🐱', 'edit')">🐱</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="edit-agent-status" class="form-input">
+                        <option value="online">🟢 Online</option>
+                        <option value="offline">🔴 Offline</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditAgent()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeEditAgentModal()">CANCELAR</button>
                 </div>
             </div>
         </div>

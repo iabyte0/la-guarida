@@ -37,3 +37,15 @@ select.form-input option { background: #242938; color: #e8eaed; }
 #avatar-modal .selected-preview { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 15px; background: #242938; border-radius: 12px; margin-bottom: 20px; }
 #avatar-modal .preview-avatar { font-size: 2.5rem; }
 #avatar-modal .preview-name { color: #00ff9d; font-weight: 700; font-size: 1.2rem; }
+
+/* AVATAR PREVIEW BOX */
+.avatar-preview-box { font-size: 3rem; text-align: center; padding: 15px; background: #242938; border-radius: 12px; margin-bottom: 10px; }
+.emoji-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.emoji-opt { font-size: 1.8rem; cursor: pointer; padding: 8px; background: #242938; border: 2px solid #2d3548; border-radius: 8px; transition: all 0.15s ease; }
+.emoji-opt:hover { border-color: #00ff9d; transform: scale(1.1); }
+.file-input { padding: 10px !important; }
+
+/* AGENT MODALS */
+#agent-modal, #edit-agent-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; }
+#agent-modal.show, #edit-agent-modal.show { display: flex; }
+#agent-modal .modal-content, #edit-agent-modal .modal-content { background: #1a1f2e; border: 2px solid #00ff9d; border-radius: 20px; max-width: 450px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0, 255, 157, 0.5); }

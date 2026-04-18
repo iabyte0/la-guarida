@@ -196,7 +196,7 @@ function renderKanban() {
     var titles = ['📋 Pendiente', '👤 Asignado', '⚙️ Progreso', '🔍 Revision', '🧪 Testing', '✅ Terminado'];
     board.innerHTML = columns.map(function(col, i) {
         var tasks = kanbanTasks[col] || [];
-        return '<div class="kanban-column"><h3>' + titles[i] + '</h3><div class="kanban-tasks">' + tasks.map(function(t) { return '<div class="task-card" draggable="true" ondragstart="dragTask(event, ' + t.id + ')"><div class="task-title">' + t.title + '</div><div class="task-meta"><span class="task-priority ' + t.priority + '">' + t.priority + '</span><span class="task-agent">' + t.agent + '</span></div></div>'; }).join('') + '</div></div>';
+        return '<div class="kanban-column"><h3>' + titles[i] + '</h3><div class="kanban-tasks">' + tasks.map(function(t) { return '<div class="kanban-task" draggable="true" ondragstart="dragTask(event, ' + t.id + ')"><div class="kanban-task-title">' + t.title + '</div><div class="kanban-task-meta"><span class="task-priority ' + t.priority + '">' + (t.priority === 'high' ? '🔴' : t.priority === 'medium' ? '🟡' : '🟢') + '</span><span class="task-agent">' + t.agent + '</span></div></div>'; }).join('') + '</div></div>';
     }).join('');
 }
 function addNewTask() {

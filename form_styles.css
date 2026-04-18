@@ -1,0 +1,21 @@
+/* FORM STYLES FOR TASK MODAL */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; color: #6b7280; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.form-input { width: 100%; padding: 12px 15px; background: #242938; border: 1px solid #2d3548; border-radius: 8px; color: #e8eaed; font-size: 0.9rem; font-family: inherit; transition: all 0.15s ease; box-sizing: border-box; }
+.form-input:focus { outline: none; border-color: #00ff9d; box-shadow: 0 0 20px rgba(0, 255, 157, 0.4); }
+.form-input::placeholder { color: #6b7280; }
+textarea.form-input { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+select.form-input { cursor: pointer; }
+select.form-input option { background: #242938; color: #e8eaed; }
+.modal-body .form-group:first-child { margin-top: 0; }
+
+/* TASK MODAL SPECIFIC */
+#task-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; }
+#task-modal.show { display: flex; }
+#task-modal .modal-content { background: #1a1f2e; border: 2px solid #00ff9d; border-radius: 20px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0, 255, 157, 0.5); }
+#task-modal .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #2d3548; }
+#task-modal .modal-header h2 { color: #00ff9d; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin: 0; }
+#task-modal .close-modal { font-size: 1.5rem; color: #6b7280; cursor: pointer; }
+#task-modal .close-modal:hover { color: #ff4757; }
+#task-modal .modal-body { padding: 20px; }

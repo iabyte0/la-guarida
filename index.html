@@ -389,6 +389,73 @@
         </div>
     </div>
 
+    <!-- MODAL EDITAR TAREA -->
+    <div class="modal" id="edit-task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ EDITAR TAREA</h2>
+                <span class="close-modal" onclick="closeEditTaskModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-task-id">
+                <input type="hidden" id="edit-task-col">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="edit-task-title" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="edit-task-desc" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Proyecto</label>
+                        <select id="edit-task-project" class="form-input">
+                            <option value="General">General</option>
+                            <option value="Ubicore">Ubicore</option>
+                            <option value="Alberto Gil">Alberto Gil</option>
+                            <option value="Mineto">Mineto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="edit-task-status" class="form-input">
+                            <option value="pendiente">📋 Pendiente</option>
+                            <option value="asignado">👤 Asignado</option>
+                            <option value="progreso">⚙️ Progreso</option>
+                            <option value="revision">🔍 Revision</option>
+                            <option value="testing">🧪 Testing</option>
+                            <option value="terminado">✅ Terminado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        <select id="edit-task-priority" class="form-input">
+                            <option value="high">🔴 Alta</option>
+                            <option value="medium">🟡 Media</option>
+                            <option value="low">🟢 Baja</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agente</label>
+                        <select id="edit-task-agent" class="form-input">
+                            <option value="Hanzo">🦞 Hanzo</option>
+                            <option value="Claude">🧠 Claude</option>
+                            <option value="Codex">💻 Codex</option>
+                            <option value="Gemini">⭐ Gemini</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditTask()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeEditTaskModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

@@ -11,11 +11,9 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- BACKGROUND EFFECTS -->
         <div class="bg-grid"></div>
         <div class="bg-scanlines"></div>
         
-        <!-- HEADER -->
         <header class="header">
             <div class="logo">
                 <span class="logo-icon glow">🦞</span>
@@ -36,13 +34,12 @@
                 </div>
             </div>
             <div class="header-right">
-                <button class="btn-small" onclick="saveData(); alert('💾 Guardado!')" title="Guardar datos">💾</button>
+                <button class="btn-small" onclick="saveData(); alert('💾 Guardado!')">💾</button>
                 <div class="clock" id="clock">--:--</div>
                 <div class="date" id="date">--</div>
             </div>
         </header>
 
-        <!-- NAV -->
         <nav class="nav-bar">
             <a class="nav-link active" onclick="navTo('panel')">🏠 Panel</a>
             <a class="nav-link" onclick="navTo('agentes')">🛸 Agentes</a>
@@ -54,9 +51,7 @@
             <a class="nav-link" onclick="navTo('logs')">📺 Logs</a>
         </nav>
 
-        <!-- MAIN GRID -->
         <main class="main-grid">
-            <!-- MODULO 1: PANEL PRINCIPAL -->
             <section class="panel control-panel" id="panel">
                 <div class="panel-header">
                     <h2>🎯 PANEL DE CONTROL</h2>
@@ -87,7 +82,6 @@
                 </div>
             </section>
 
-            <!-- MODULO 2: NAVE DE AGENTES -->
             <section class="panel agents-panel" id="agentes">
                 <div class="panel-header">
                     <h2>🛸 NAVE DE AGENTES</h2>
@@ -100,7 +94,6 @@
             </section>
         </main>
 
-        <!-- MODULO 3: KANBAN SUPREMO -->
         <section class="panel kanban-panel" id="kanban">
             <div class="panel-header">
                 <h2>📋 TABLERO DE MISIONES</h2>
@@ -109,7 +102,6 @@
             <div class="kanban-board" id="kanban-board"></div>
         </section>
 
-        <!-- MODULO 4: ESTADÍSTICAS -->
         <section class="panel stats-panel" id="stats">
             <div class="panel-header">
                 <h2>📊 CENTRO DE ESTADÍSTICAS</h2>
@@ -162,7 +154,6 @@
             </div>
         </section>
 
-        <!-- MODULO 5: POMODORO -->
         <section class="panel pomodoro-panel" id="pomodoro">
             <div class="panel-header">
                 <h2>⏱️ POMODORO</h2>
@@ -178,22 +169,11 @@
                 </div>
                 <div class="pomodoro-count">
                     <span>POMODOROS HOY: </span>
-                    <div class="pomo-dots">
-                        <span class="pomo-dot"></span>
-                        <span class="pomo-dot"></span>
-                        <span class="pomo-dot"></span>
-                        <span class="pomo-dot"></span>
-                        <span class="pomo-empty"></span>
-                        <span class="pomo-empty"></span>
-                        <span class="pomo-empty"></span>
-                        <span class="pomo-empty"></span>
-                    </div>
                     <span class="pomo-ratio">4/8</span>
                 </div>
             </div>
         </section>
 
-        <!-- MODULO 6: CALENDARIO -->
         <section class="panel calendar-panel" id="calendario">
             <div class="panel-header">
                 <h2>📅 CALENDARIO 2026</h2>
@@ -210,28 +190,12 @@
                     <span class="cal-day"></span><span class="cal-day">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span>
                     <span class="cal-day">7</span><span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span>
                     <span class="cal-day">14</span><span class="cal-day">15</span><span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day today">18</span><span class="cal-day">19</span><span class="cal-day">20</span>
-                    <span class="cal-day">21<span class="event-dot">🚚</span></span><span class="cal-day">22</span><span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span><span class="cal-day">26</span><span class="cal-day">27</span>
+                    <span class="cal-day">21</span><span class="cal-day">22</span><span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span><span class="cal-day">26</span><span class="cal-day">27</span>
                     <span class="cal-day">28</span><span class="cal-day">29</span><span class="cal-day">30</span>
-                </div>
-            </div>
-            <div class="events-list">
-                <h4>PRÓXIMOS EVENTOS</h4>
-                <div class="event-item">
-                    <span class="event-date">21 Abr</span>
-                    <span class="event-title">🚚 Entrega Ubicore</span>
-                </div>
-                <div class="event-item">
-                    <span class="event-date">04 May</span>
-                    <span class="event-title">📋 Check-in</span>
-                </div>
-                <div class="event-item">
-                    <span class="event-date">18 May</span>
-                    <span class="event-title">📊 Review Fase 1</span>
                 </div>
             </div>
         </section>
 
-        <!-- MODULO 7: ARCHIVOS -->
         <section class="panel files-panel" id="archivos">
             <div class="panel-header">
                 <h2>📁 ARCHIVOS</h2>
@@ -242,44 +206,17 @@
                     <div class="folder-header">
                         <span class="folder-icon">📁</span>
                         <span class="folder-name">Informes</span>
-                        <span class="folder-count">5 archivos</span>
-                    </div>
-                    <div class="folder-files">
-                        <div class="file-item">📄 Dashboard_Hanzo_v3_PROPUE...</div>
-                        <div class="file-item">📄 Propuesta_dashboard_Hanzo.md</div>
-                        <div class="file-item">📄 Dashboards_agentes_IA.md</div>
-                        <div class="file-item">📄 informe_dropshipping.md</div>
-                        <div class="file-item">📄 UBICORE.md</div>
                     </div>
                 </div>
                 <div class="folder">
                     <div class="folder-header">
                         <span class="folder-icon">📁</span>
                         <span class="folder-name">Ubicore</span>
-                        <span class="folder-count">3 archivos</span>
-                    </div>
-                    <div class="folder-files">
-                        <div class="file-item">🖼️ ubicore_real_blanco.png</div>
-                        <div class="file-item">🖼️ ubicore_creativo.png</div>
-                        <div class="file-item">📄 estrategia.md</div>
-                    </div>
-                </div>
-                <div class="folder">
-                    <div class="folder-header">
-                        <span class="folder-icon">📁</span>
-                        <span class="folder-name">Memoria</span>
-                        <span class="folder-count">18 archivos</span>
-                    </div>
-                    <div class="folder-files">
-                        <div class="file-item">📄 2026-04-18.md</div>
-                        <div class="file-item">📄 2026-04-17.md</div>
-                        <div class="file-item">📄 2026-04-16.md</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MODULO 8: LOGS -->
         <section class="panel logs-panel" id="logs">
             <div class="panel-header">
                 <h2>📺 MONITOR EN VIVO</h2>
@@ -288,62 +225,7 @@
         </section>
     </div>
 
-    <!-- MODAL NUEVA TAREA -->
-    <div class="modal" id="task-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📋 NUEVA TAREA</h2>
-                <span class="close-modal" onclick="closeTaskModal()">✕</span>
-            </div>
-            <div class="modal-body">
-                <div class="avatar-grid">
-                    <div class="avatar-option" onclick="selectAvatar('🦞')">🦞</div>
-                    <div class="avatar-option" onclick="selectAvatar('🐱')">🐱</div>
-                    <div class="avatar-option" onclick="selectAvatar('🐈‍⬛')">🐈‍⬛</div>
-                    <div class="avatar-option" onclick="selectAvatar('🐆')">🐆</div>
-                    <div class="avatar-option" onclick="selectAvatar('🐺')">🐺</div>
-                    <div class="avatar-option" onclick="selectAvatar('🦊')">🦊</div>
-                    <div class="avatar-option" onclick="selectAvatar('🐻')">🐻</div>
-                    <div class="avatar-option" onclick="selectAvatar('🤖')">🤖</div>
-                    <div class="avatar-option" onclick="selectAvatar('🧠')">🧠</div>
-                    <div class="avatar-option" onclick="selectAvatar('💻')">💻</div>
-                    <div class="avatar-option" onclick="selectAvatar('🛸')">🛸</div>
-                    <div class="avatar-option" onclick="selectAvatar('🚀')">🚀</div>
-                    <div class="avatar-option" onclick="selectAvatar('⭐')">⭐</div>
-                    <div class="avatar-option" onclick="selectAvatar('💎')">💎</div>
-                    <div class="avatar-option" onclick="selectAvatar('⚡')">⚡</div>
-                    <div class="avatar-option" onclick="selectAvatar('🌈')">🌈</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎭')">🎭</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎤')">🎤</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎵')">🎵</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎨')">🎨</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎮')">🎮</div>
-                    <div class="avatar-option" onclick="selectAvatar('🏆')">🏆</div>
-                    <div class="avatar-option" onclick="selectAvatar('🥇')">🥇</div>
-                    <div class="avatar-option" onclick="selectAvatar('👑')">👑</div>
-                    <div class="avatar-option" onclick="selectAvatar('🔥')">🔥</div>
-                    <div class="avatar-option" onclick="selectAvatar('💀')">💀</div>
-                    <div class="avatar-option" onclick="selectAvatar('👻')">👻</div>
-                    <div class="avatar-option" onclick="selectAvatar('🎃')">🎃</div>
-                    <div class="avatar-option" onclick="selectAvatar('🦄')">🦄</div>
-                    <div class="avatar-option" onclick="selectAvatar('🌸')">🌸</div>
-                    <div class="avatar-option" onclick="selectAvatar('🌙')">🌙</div>
-                    <div class="avatar-option" onclick="selectAvatar('☀️')">☀️</div>
-                </div>
-                <div class="selected-preview">
-                    <span>Preview: </span>
-                    <span class="preview-avatar" id="preview-avatar">🦞</span>
-                    <span class="preview-name" id="preview-name">HANZO</span>
-                </div>
-                <div class="modal-actions">
-                    <button class="btn-neon" onclick="saveAvatar()">💾 GUARDAR</button>
-                    <button class="btn-small" onclick="closeModal()">CANCELAR</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL NUEVA TAREA -->
+    <!-- MODAL TAREA (FORMULARIO) -->
     <div class="modal" id="task-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -357,7 +239,7 @@
                 </div>
                 <div class="form-group">
                     <label>Descripcion</label>
-                    <textarea id="task-desc" placeholder="Descripcion detallada" class="form-input" rows="3"></textarea>
+                    <textarea id="task-desc" placeholder="Descripcion" class="form-input" rows="3"></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -374,6 +256,8 @@
                         <select id="task-status" class="form-input">
                             <option value="pendiente">Pendiente</option>
                             <option value="asignado">Asignado</option>
+                            <option value="progreso">En Progreso</option>
+                            <option value="terminado">Terminado</option>
                         </select>
                     </div>
                 </div>
@@ -396,17 +280,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Tipo</label>
-                    <select id="task-type" class="form-input">
-                        <option value="tarea">Tarea</option>
-                        <option value="mision">Mision</option>
-                        <option value="bug">Bug</option>
-                        <option value="nota">Nota</option>
-                    </select>
-                </div>
                 <div class="modal-actions">
-                    <button class="btn-neon" onclick="createTaskFromModal()">✓ CREAR TAREA</button>
+                    <button class="btn-neon" onclick="createTaskFromModal()">✓ CREAR</button>
                     <button class="btn-small" onclick="closeTaskModal()">CANCELAR</button>
                 </div>
             </div>
@@ -432,30 +307,26 @@
                         <option value="Analisis">Analisis</option>
                         <option value="Coding">Coding</option>
                         <option value="Research">Research</option>
-                        <option value="Marketing">Marketing</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Avatar (elige emoji o sube imagen)</label>
-                    <div class="avatar-preview-box" id="new-agent-avatar-preview" style="font-size:3rem;text-align:center;padding:15px;background:#242938;border-radius:12px;margin-bottom:10px;">🦞</div>
-                    <input type="file" id="agent-avatar-upload" accept="image/*" class="form-input" style="margin-bottom:15px;" onchange="handleAgentAvatarUpload(this,'new')">
-                    <div class="emoji-grid">
+                    <label>Avatar</label>
+                    <input type="file" id="agent-avatar-upload" accept="image/*" class="form-input" onchange="handleAgentAvatarUpload(this,'new')">
+                    <div class="emoji-grid" style="margin-top:10px;">
                         <span class="emoji-opt" onclick="selectAgentEmoji('🦞', 'new')">🦞</span>
                         <span class="emoji-opt" onclick="selectAgentEmoji('🧠', 'new')">🧠</span>
                         <span class="emoji-opt" onclick="selectAgentEmoji('💻', 'new')">💻</span>
                         <span class="emoji-opt" onclick="selectAgentEmoji('⭐', 'new')">⭐</span>
                         <span class="emoji-opt" onclick="selectAgentEmoji('🤖', 'new')">🤖</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('🐱', 'new')">🐱</span>
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button class="btn-neon" onclick="createAgentFromModal()">✓ CREAR AGENTE</button>
+                    <button class="btn-neon" onclick="createAgentFromModal()">✓ CREAR</button>
                     <button class="btn-small" onclick="closeAgentModal()">CANCELAR</button>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- MODAL EDITAR AGENTE -->
     <div class="modal" id="edit-agent-modal">
@@ -477,21 +348,7 @@
                         <option value="Analisis">Analisis</option>
                         <option value="Coding">Coding</option>
                         <option value="Research">Research</option>
-                        <option value="Marketing">Marketing</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label>Avatar (elige emoji o sube imagen)</label>
-                    <div class="avatar-preview-box" id="edit-agent-avatar-preview" style="font-size:3rem;text-align:center;padding:15px;background:#242938;border-radius:12px;margin-bottom:10px;">🦞</div>
-                    <input type="file" id="edit-agent-avatar-upload" accept="image/*" class="form-input" style="margin-bottom:15px;" onchange="handleAgentAvatarUpload(this,'edit')">
-                    <div class="emoji-grid">
-                        <span class="emoji-opt" onclick="selectAgentEmoji('🦞', 'edit')">🦞</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('🧠', 'edit')">🧠</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('💻', 'edit')">💻</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('⭐', 'edit')">⭐</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('🤖', 'edit')">🤖</span>
-                        <span class="emoji-opt" onclick="selectAgentEmoji('🐱', 'edit')">🐱</span>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label>Estado</label>
@@ -503,6 +360,30 @@
                 <div class="modal-actions">
                     <button class="btn-neon" onclick="saveEditAgent()">💾 GUARDAR</button>
                     <button class="btn-small" onclick="closeEditAgentModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AVATAR EDITOR -->
+    <div class="modal" id="avatar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 AVATARES</h2>
+                <span class="close-modal" onclick="closeModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <div class="emoji-grid">
+                    <span class="emoji-opt" onclick="selectAvatar('🦞')">🦞</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🧠')">🧠</span>
+                    <span class="emoji-opt" onclick="selectAvatar('💻')">💻</span>
+                    <span class="emoji-opt" onclick="selectAvatar('⭐')">⭐</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🤖')">🤖</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🐱')">🐱</span>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveAvatar()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeModal()">CANCELAR</button>
                 </div>
             </div>
         </div>

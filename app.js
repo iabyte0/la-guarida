@@ -267,10 +267,53 @@ function updateAgentCount() {
 // ════════════════════════════════════════════════════════════════════
 function addNewAgent() {
     log('➕ addNewAgent clicked');
-    var name = prompt('Nombre del nuevo agente:');
-    if (!name) { log('❌ Cancelado por usuario'); return; }
-    var specialty = prompt('Especialidad (Análisis, Coding, Research, General):') || 'General';
-    var avatar = prompt('Avatar (ej: 🤖, 🧠, 💻):') || '🤖';
+    var modal = document.getElementById('agent-modal');
+    if (modal) {
+        modal.classList.add('show');
+        document.getElementById('agent-name').value = '';
+        document.getElementById('new-agent-avatar-preview').textContent = '🦞';
+        log('✅ Modal agente abierto');
+    } else {
+        log('❌ Modal agente no encontrado');
+    }
+}
+
+function closeAgentModal() {
+    var m = document.getElementById('agent-modal');
+    if (m) m.classList.remove('show');
+}
+
+function selectAgentEmoji(emoji, type) {
+    var preview = type === 'new' ? document.getElementById('new-agent-avatar-preview') : document.getElementById('edit-agent-avatar-preview');
+    if (preview) {
+        preview.textContent = emoji;
+        preview.dataset.emoji = emoji;
+        preview.dataset.type = 'emoji';
+    }
+}
+
+function handleAgentAvatarUpload(input, type) {
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var preview = type === 'new' ? document.getElementById('new-agent-avatar-preview') : document.getElementById('edit-agent-avatar-preview');
+            if (preview) {
+                preview.innerHTML = '<img src="' + e.target.result + '" style="width:50px;height:50px;border-radius:50%;">';
+                preview.dataset.emoji = e.target.result;
+                preview.dataset.type = 'image';
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+}
+function createAgentFromModal() {
+    var name = document.getElementById('agent-name').value;
+    var specialty = document.getElementById('agent-specialty').value;
+    var preview = document.getElementById('new-agent-avatar-preview');
+    var avatar = preview ? (preview.dataset.type === 'image' ? preview.dataset.emoji : (preview.textContent || '🦞')) : '🦞';
+    
+    if (!name) { alert('Pon un nombre!'); return; }
     
     agents.push({
         id: agents.length + 1,
@@ -281,7 +324,70 @@ function addNewAgent() {
         specialty: specialty,
         progress: 0
     });
+    log('✅ Nuevo agente: ' + name);
+    closeAgentModal();
     renderAgents();
+    saveData();
+}
+
+function editAgent(id) {
+    log('✏️ Editar agente: ' + id);
+    var agent = agents.find(function(a) { return a.id === id; });
+    if (agent) {
+        document.getElementById('edit-agent-id').value = id;
+        document.getElementById('edit-agent-name').value = agent.name;
+        document.getElementById('edit-agent-specialty').value = agent.specialty;
+        document.getElementById('edit-agent-status').value = agent.status;
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview) {
+            if (agent.avatar && agent.avatar.startsWith('data:image')) {
+                preview.innerHTML = '<img src="' + agent.avatar + '" style="width:50px;height:50px;border-radius:50%;">';
+                preview.dataset.type = 'image';
+            } else {
+                preview.textContent = agent.avatar || '🦞';
+                preview.dataset.type = 'emoji';
+            }
+        }
+        var modal = document.getElementById('edit-agent-modal');
+        if (modal) modal.classList.add('show');
+    }
+}
+
+function closeEditAgentModal() {
+    var m = document.getElementById('edit-agent-modal');
+    if (m) m.classList.remove('show');
+}
+
+function selectEditAgentEmoji(emoji) {
+    var preview = document.getElementById('edit-agent-avatar-preview');
+    if (preview) {
+        preview.textContent = emoji;
+        preview.dataset.emoji = emoji;
+        preview.dataset.type = 'emoji';
+    }
+}
+
+function previewEditAgentAvatar(input) {
+    handleAgentAvatarUpload(input, 'edit');
+}
+
+function saveEditAgent() {
+    var id = parseInt(document.getElementById('edit-agent-id').value);
+    var agent = agents.find(function(a) { return a.id === id; });
+    if (agent) {
+        agent.name = document.getElementById('edit-agent-name').value;
+        agent.specialty = document.getElementById('edit-agent-specialty').value;
+        agent.status = document.getElementById('edit-agent-status').value;
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview) {
+            agent.avatar = preview.dataset.type === 'image' ? preview.dataset.emoji : preview.textContent;
+        }
+        log('💾 Guardado: ' + agent.name);
+        closeEditAgentModal();
+        renderAgents();
+        saveData();
+    }
+}
     updateAgentCount();
     log('🛸 Nuevo agente: ' + avatar + ' ' + name);
     saveData();
@@ -714,3 +820,12 @@ function createTaskFromModal() {
 }
 window.closeTaskModal = closeTaskModal;
 window.createTaskFromModal = createTaskFromModal;
+window.closeAgentModal = closeAgentModal;
+window.createAgentFromModal = createAgentFromModal;
+window.selectAgentEmoji = selectAgentEmoji;
+window.handleAgentAvatarUpload = handleAgentAvatarUpload;
+window.editAgent = editAgent;
+window.closeEditAgentModal = closeEditAgentModal;
+window.selectEditAgentEmoji = selectEditAgentEmoji;
+window.previewEditAgentAvatar = previewEditAgentAvatar;
+window.saveEditAgent = saveEditAgent;

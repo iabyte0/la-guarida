@@ -196,8 +196,84 @@ function renderKanban() {
     var titles = ['📋 Pendiente', '👤 Asignado', '⚙️ Progreso', '🔍 Revision', '🧪 Testing', '✅ Terminado'];
     board.innerHTML = columns.map(function(col, i) {
         var tasks = kanbanTasks[col] || [];
-        return '<div class="kanban-column" ondragover="allowDrop(event)" ondrop="dropTask(event, \'' + col + '\')"><h3>' + titles[i] + '</h3><div class="kanban-tasks">' + tasks.map(function(t) { return '<div class="kanban-task" draggable="true" ondragstart="dragTask(event, ' + t.id + ')"><div class="kanban-task-title">' + t.title + '</div>' + (t.description ? '<div class="kanban-task-desc">' + t.description + '</div>' : '') + '<div class="kanban-task-meta"><span class="task-project">📁 ' + (t.project || 'General') + '</span><span class="task-priority ' + t.priority + '">' + (t.priority === 'high' ? '🔴' : t.priority === 'medium' ? '🟡' : '🟢') + '</span><span class="task-agent">👤 ' + t.agent + '</span></div></div>'; }).join('') + '</div></div>';
+        return '<div class="kanban-column" ondragover="allowDrop(event)" ondrop="dropTask(event, \'' + col + '\')"><h3>' + titles[i] + ' (' + tasks.length + ')</h3><div class="kanban-tasks">' + tasks.map(function(t) { return '<div class="kanban-task" draggable="true" ondragstart="dragTask(event, ' + t.id + ')"><div class="kanban-task-header"><div class="kanban-task-title">' + t.title + '</div><div class="kanban-task-actions"><button class="btn-icon" onclick="editTask(' + t.id + ')" title="Editar">✏️</button><button class="btn-icon" onclick="deleteTask(' + t.id + ')" title="Eliminar">🗑️</button></div></div>' + (t.description ? '<div class="kanban-task-desc">' + t.description + '</div>' : '') + '<div class="kanban-task-meta"><span class="task-project">📁 ' + (t.project || 'General') + '</span><span class="task-priority ' + t.priority + '">' + (t.priority === 'high' ? '🔴' : t.priority === 'medium' ? '🟡' : '🟢') + '</span><span class="task-agent">👤 ' + t.agent + '</span></div></div>'; }).join('') + '</div></div>';
     }).join('');
+}
+
+function editTask(id) {
+    var allCols = ['pendiente', 'asignado', 'progreso', 'revision', 'testing', 'terminado'];
+    var task = null;
+    var currentCol = '';
+    allCols.forEach(function(c) {
+        var found = (kanbanTasks[c] || []).find(function(t) { return t.id === id; });
+        if (found) { task = found; currentCol = c; }
+    });
+    if (!task) return;
+    
+    document.getElementById('edit-task-id').value = id;
+    document.getElementById('edit-task-col').value = currentCol;
+    document.getElementById('edit-task-title').value = task.title || '';
+    document.getElementById('edit-task-desc').value = task.description || '';
+    document.getElementById('edit-task-project').value = task.project || 'General';
+    document.getElementById('edit-task-status').value = currentCol;
+    document.getElementById('edit-task-priority').value = task.priority || 'medium';
+    document.getElementById('edit-task-agent').value = task.agent || 'Hanzo';
+    
+    document.getElementById('edit-task-modal').classList.add('show');
+}
+
+function saveEditTask() {
+    var id = parseInt(document.getElementById('edit-task-id').value);
+    var oldCol = document.getElementById('edit-task-col').value;
+    var newCol = document.getElementById('edit-task-status').value;
+    var title = document.getElementById('edit-task-title').value;
+    var desc = document.getElementById('edit-task-desc').value;
+    var project = document.getElementById('edit-task-project').value;
+    var priority = document.getElementById('edit-task-priority').value;
+    var agent = document.getElementById('edit-task-agent').value;
+    
+    if (!title) { alert('Pon un titulo!'); return; }
+    
+    var allCols = ['pendiente', 'asignado', 'progreso', 'revision', 'testing', 'terminado'];
+    allCols.forEach(function(c) {
+        var idx = -1;
+        for (var i = 0; i < (kanbanTasks[c] || []).length; i++) {
+            if (kanbanTasks[c][i].id === id) { idx = i; break; }
+        }
+        if (idx > -1) {
+            kanbanTasks[c].splice(idx, 1);
+        }
+    });
+    
+    var newTask = { id: id, title: title, description: desc, project: project, priority: priority, agent: agent };
+    if (!kanbanTasks[newCol]) kanbanTasks[newCol] = [];
+    kanbanTasks[newCol].push(newTask);
+    
+    log('✏️ Tarea editada: ' + title);
+    closeEditTaskModal();
+    renderKanban();
+    saveData();
+}
+
+function closeEditTaskModal() {
+    document.getElementById('edit-task-modal').classList.remove('show');
+}
+
+function deleteTask(id) {
+    if (!confirm('¿Eliminar esta tarea?')) return;
+    var allCols = ['pendiente', 'asignado', 'progreso', 'revision', 'testing', 'terminado'];
+    allCols.forEach(function(c) {
+        var idx = -1;
+        for (var i = 0; i < (kanbanTasks[c] || []).length; i++) {
+            if (kanbanTasks[c][i].id === id) { idx = i; break; }
+        }
+        if (idx > -1) {
+            var removed = kanbanTasks[c].splice(idx, 1)[0];
+            log('🗑️ Tarea eliminada: ' + removed.title);
+        }
+    });
+    renderKanban();
+    saveData();
 }
 function addNewTask() {
     var modal = document.getElementById('task-modal');
@@ -375,3 +451,7 @@ window.selectAgentEmoji = selectAgentEmoji;
 window.renderAgents = renderAgents;
 window.updateAgentCount = updateAgentCount;
 window.renderKanban = renderKanban;
+window.editTask = editTask;
+window.saveEditTask = saveEditTask;
+window.closeEditTaskModal = closeEditTaskModal;
+window.deleteTask = deleteTask;

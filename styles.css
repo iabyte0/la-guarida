@@ -615,6 +615,27 @@ body {
     font-weight: 700;
 }
 
+.kanban-task-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+.task-project, .task-agent {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    margin-right: 4px;
+    display: inline-block;
+}
+
+.task-project {
+    background: rgba(100, 149, 237, 0.2);
+    color: #6495ed;
+}
+
+
 .kanban-task-priority.high { background: rgba(255, 71, 87, 0.2); color: var(--accent-danger); }
 .kanban-task-priority.medium { background: rgba(255, 170, 0, 0.2); color: var(--accent-warning); }
 .kanban-task-priority.low { background: rgba(0, 255, 157, 0.2); color: var(--accent-primary); }

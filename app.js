@@ -417,7 +417,7 @@ function createEventFromModal() {
     log('Event creado: ' + title);
     closeEventModal();
     renderEvents();
-    addCalendarEventDots();
+    renderCalendarWithEvents();
     renderCalendarEvents();
     saveData();
 }
@@ -525,3 +525,80 @@ function addCalendarEventDots() {
     });
 }
 window.addCalendarEventDots = addCalendarEventDots;
+function renderCalendarWithEvents() {
+    var dayBlocks = document.querySelectorAll('.cal-days');
+    if (!dayBlocks.length) return;
+    
+    var dayElements = dayBlocks[0].querySelectorAll('.cal-day');
+    var today = new Date();
+    var firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), 1).getDay() || 7;
+    
+    events.forEach(function(e) {
+        if (!e.date) return;
+        var parts = e.date.split('-');
+        var day = parseInt(parts[2]);
+        var idx = day + firstDayOfWeek - 2;
+        
+        if (day >= 1 && day <= 31 && dayElements[idx]) {
+            var el = dayElements[idx];
+            el.classList.add('has-event');
+            el.style.position = 'relative';
+            
+            var eventBadge = document.createElement('div');
+            eventBadge.className = 'calendar-event';
+            eventBadge.innerHTML = '<span class="event-time">' + (e.time || '--:--') + '</span> <span class="event-title">' + e.title + '</span>';
+            eventBadge.dataset.eventId = e.id;
+            eventBadge.onclick = function(evt) { 
+                evt.stopPropagation();
+                openEventDetails(e.id); 
+            };
+            el.appendChild(eventBadge);
+        }
+    });
+}
+
+function openEventDetails(id) {
+    var ev = events.find(function(e) { return e.id === id; });
+    if (!ev) return;
+    document.getElementById('edit-event-id').value = id;
+    document.getElementById('edit-event-title').value = ev.title || '';
+    document.getElementById('edit-event-desc').value = ev.description || '';
+    document.getElementById('edit-event-date').value = ev.date || '';
+    document.getElementById('edit-event-time').value = ev.time || '';
+    document.getElementById('edit-event-assign').value = ev.assign || 'Jeremy';
+    document.getElementById('edit-event-modal').classList.add('show');
+}
+
+function saveEditEvent() {
+    var id = parseInt(document.getElementById('edit-event-id').value);
+    var idx = events.findIndex(function(e) { return e.id === id; });
+    if (idx === -1) return;
+    
+    events[idx].title = document.getElementById('edit-event-title').value;
+    events[idx].description = document.getElementById('edit-event-desc').value;
+    events[idx].date = document.getElementById('edit-event-date').value;
+    events[idx].time = document.getElementById('edit-event-time').value;
+    events[idx].assign = document.getElementById('edit-event-assign').value;
+    
+    closeEditEventModal();
+    renderEvents();
+    renderCalendarWithEvents();
+    saveData();
+}
+
+function closeEditEventModal() {
+    document.getElementById('edit-event-modal').classList.remove('show');
+}
+
+function deleteEvent(id) {
+    if (!confirm('Eliminar este evento?')) return;
+    events = events.filter(function(e) { return e.id !== id; });
+    renderEvents();
+    renderCalendarWithEvents();
+    saveData();
+}
+window.renderCalendarWithEvents = renderCalendarWithEvents;
+window.openEventDetails = openEventDetails;
+window.saveEditEvent = saveEditEvent;
+window.closeEditEventModal = closeEditEventModal;
+window.deleteEvent = deleteEvent;

@@ -357,6 +357,10 @@
             <div class="modal-body">
                 <input type="hidden" id="edit-agent-id">
                 <div class="form-group">
+                    <label>Cambiar Imagen</label>
+                    <input type="file" id="edit-agent-avatar-upload" accept="image/*" class="form-input" onchange="handleAgentAvatarUpload(this,'edit')">
+                </div>
+                <div class="form-group">
                     <label>Nombre</label>
                     <input type="text" id="edit-agent-name" class="form-input">
                 </div>
@@ -378,7 +382,7 @@
                 </div>
                 <div class="modal-actions">
                     <button class="btn-neon" onclick="saveEditAgent()">💾 GUARDAR</button>
-                    <button class="btn-small" onclick="closeEditAgentModal()">CANCELAR</button>
+                    <button class="btn-small btn-danger" onclick="deleteAgent(parseInt(document.getElementById('edit-agent-id').value))">ELIMINAR</button>
                 </div>
             </div>
         </div>

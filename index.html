@@ -184,7 +184,8 @@
                 <span class="cal-tab">Mayo</span>
                 <span class="cal-tab">Junio</span>
             </div>
-            <div class="calendar-grid">
+            <div class="events-list" id="events-list"></div>
+<div class="calendar-grid">
                 <div class="cal-header"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
                 <div class="cal-days">
                     <span class="cal-day"></span><span class="cal-day">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span>
@@ -457,5 +458,48 @@
     </div>
 
     <script src="app.js"></script>
+<!-- MODAL EVENTO -->
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>NUEVO EVENTO</h2>
+                <span class="close-modal" onclick="closeEventModal()">X</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="event-title" class="form-input" placeholder="Titulo del evento">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="event-desc" class="form-input" rows="2" placeholder="Descripcion"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="event-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" id="event-time" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Asignado a</label>
+                    <select id="event-assign" class="form-input">
+                        <option value="Jeremy">Jeremy</option>
+                        <option value="Hanzo">Hanzo</option>
+                        <option value="Claude">Claude</option>
+                        <option value="Codex">Codex</option>
+                        <option value="Gemini">Gemini</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="createEventFromModal()">CREAR</button>
+                    <button class="btn-small" onclick="closeEventModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

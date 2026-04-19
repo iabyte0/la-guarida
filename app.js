@@ -106,8 +106,8 @@ function handleAgentAvatarUpload(input, type) {
             var preview = document.getElementById(previewId);
             if (preview) { 
                 preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">'; 
-                preview.dataset.emoji = e.target.result; 
-                preview.dataset.type = 'image'; 
+                preview.dataset.image = e.target.result; 
+                preview.dataset.type = 'image';
             }
         };
         reader.readAsDataURL(file);
@@ -132,10 +132,17 @@ function editAgent(id) {
         document.getElementById('edit-agent-name').value = agent.name;
         document.getElementById('edit-agent-specialty').value = agent.specialty;
         document.getElementById('edit-agent-status').value = agent.status;
-        var img = document.getElementById('edit-agent-avatar-img');
-        if (img) {
-            img.src = agent.avatar && agent.avatar.startsWith('data:') ? agent.avatar : '';
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview) {
+            if (agent.avatar && agent.avatar.startsWith('data:')) {
+                preview.innerHTML = '<img src="' + agent.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">';
+                preview.dataset.image = agent.avatar;
+                preview.dataset.type = 'image';
+            } else {
+                preview.innerHTML = agent.avatar || '🦞';
+            }
         }
+        document.getElementById('edit-agent-avatar-upload').value = '';
         var modal = document.getElementById('edit-agent-modal');
         if (modal) modal.classList.add('show');
     }
@@ -152,8 +159,8 @@ function saveEditAgent() {
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
         var preview = document.getElementById('edit-agent-avatar-preview');
-        if (preview && preview.dataset.type === 'image') {
-            agent.avatar = preview.dataset.emoji;
+        if (preview && preview.dataset.type === 'image' && preview.dataset.image) {
+            agent.avatar = preview.dataset.image;
         }
         log('Guardado: ' + agent.name);
         closeEditAgentModal();
@@ -434,7 +441,6 @@ function createEventFromModal() {
     closeEventModal();
     renderEvents();
     renderCalendarWithEvents();
-    renderCalendarEvents();
     saveData();
 }
 function addNewFile() {

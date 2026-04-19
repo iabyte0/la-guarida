@@ -177,12 +177,30 @@
         <section class="panel calendar-panel" id="calendario">
             <div class="panel-header">
                 <h2>📅 CALENDARIO</h2>
+                <select id="calendar-year" class="year-select" onchange="setYear(parseInt(this.value))">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                </select>
                 <button class="btn-neon" onclick="addNewEvent()">+ EVENTO</button>
             </div>
             <div class="calendar-tabs">
-                <span class="cal-tab" onclick="switchMonth(3)">Abril</span>
+                <span class="cal-tab" onclick="switchMonth(0)">Ene</span>
+                <span class="cal-tab" onclick="switchMonth(1)">Feb</span>
+                <span class="cal-tab" onclick="switchMonth(2)">Mar</span>
+                <span class="cal-tab" onclick="switchMonth(3)">Abr</span>
                 <span class="cal-tab" onclick="switchMonth(4)">Mayo</span>
-                <span class="cal-tab" onclick="switchMonth(5)">Junio</span>
+                <span class="cal-tab" onclick="switchMonth(5)">Jun</span>
+                <span class="cal-tab" onclick="switchMonth(6)">Jul</span>
+                <span class="cal-tab" onclick="switchMonth(7)">Ago</span>
+                <span class="cal-tab" onclick="switchMonth(8)">Sep</span>
+                <span class="cal-tab" onclick="switchMonth(9)">Oct</span>
+                <span class="cal-tab" onclick="switchMonth(10)">Nov</span>
+                <span class="cal-tab" onclick="switchMonth(11)">Dic</span>
             </div>
             <div class="events-list" id="events-list"></div>
 <div class="calendar-grid">

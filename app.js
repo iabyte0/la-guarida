@@ -393,8 +393,31 @@ function resetPomodoro() {
 
 // EVENTS & FILES
 function addNewEvent() {
-    var title = prompt('Evento:');
-    if (title) log('📅 Evento: ' + title);
+    document.getElementById('event-title').value = '';
+    document.getElementById('event-desc').value = '';
+    document.getElementById('event-date').value = '';
+    document.getElementById('event-time').value = '';
+    document.getElementById('event-assign').value = 'Jeremy';
+    document.getElementById('event-modal').classList.add('show');
+}
+function closeEventModal() {
+    var m = document.getElementById('event-modal');
+    if (m) m.classList.remove('show');
+}
+function createEventFromModal() {
+    var title = document.getElementById('event-title').value;
+    var desc = document.getElementById('event-desc').value;
+    var date = document.getElementById('event-date').value;
+    var time = document.getElementById('event-time').value;
+    var assign = document.getElementById('event-assign').value;
+    
+    if (!title || !date) { alert('Pon titulo y fecha!'); return; }
+    
+    events.push({ id: Date.now(), title: title, description: desc, date: date, time: time, assign: assign });
+    log('Event creado: ' + title);
+    closeEventModal();
+    renderEvents();
+    saveData();
 }
 function addNewFile() {
     var name = prompt('Archivo:');

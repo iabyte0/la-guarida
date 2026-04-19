@@ -102,8 +102,13 @@ function handleAgentAvatarUpload(input, type) {
     if (file) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            var preview = document.getElementById('new-agent-avatar-preview');
-            if (preview) { preview.innerHTML = '<img src="' + e.target.result + '" style="width:50px;height:50px;border-radius:50%;">'; preview.dataset.emoji = e.target.result; preview.dataset.type = 'image'; }
+            var previewId = type === 'edit' ? 'edit-agent-avatar-preview' : 'new-agent-avatar-preview';
+            var preview = document.getElementById(previewId);
+            if (preview) { 
+                preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">'; 
+                preview.dataset.emoji = e.target.result; 
+                preview.dataset.type = 'image'; 
+            }
         };
         reader.readAsDataURL(file);
     }
@@ -127,6 +132,10 @@ function editAgent(id) {
         document.getElementById('edit-agent-name').value = agent.name;
         document.getElementById('edit-agent-specialty').value = agent.specialty;
         document.getElementById('edit-agent-status').value = agent.status;
+        var img = document.getElementById('edit-agent-avatar-img');
+        if (img) {
+            img.src = agent.avatar && agent.avatar.startsWith('data:') ? agent.avatar : '';
+        }
         var modal = document.getElementById('edit-agent-modal');
         if (modal) modal.classList.add('show');
     }
@@ -142,7 +151,11 @@ function saveEditAgent() {
         agent.name = document.getElementById('edit-agent-name').value;
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
-        log('💾 Guardado: ' + agent.name);
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview && preview.dataset.type === 'image') {
+            agent.avatar = preview.dataset.emoji;
+        }
+        log('Guardado: ' + agent.name);
         closeEditAgentModal();
         renderAgents();
         saveData();
@@ -814,3 +827,11 @@ function initTabSystem() {
 window.openTab=openTab;
 window.initTabSystem=initTabSystem;
 initTabSystem();
+function deleteAgent(id) {
+    if (!confirm('Eliminar este agente?')) return;
+    agents = agents.filter(function(a) { return a.id !== id; });
+    renderAgents();
+    saveData();
+    log('Agente eliminado');
+}
+window.deleteAgent = deleteAgent;

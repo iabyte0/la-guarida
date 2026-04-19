@@ -151,18 +151,23 @@ function saveEditAgent() {
         agent.name = document.getElementById('edit-agent-name').value;
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
-        var preview = document.getElementById('edit-agent-avatar-preview');
-        if (preview) {
-            if (preview.dataset.type === 'image') {
-                agent.avatar = preview.dataset.image || preview.src || '';
-            } else if (preview.textContent) {
-                agent.avatar = preview.textContent;
-            }
+        var fileInput = document.getElementById('edit-agent-avatar-upload');
+        if (fileInput && fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                agent.avatar = e.target.result;
+                log('Guardado: ' + agent.name);
+                closeEditAgentModal();
+                renderAgents();
+                saveData();
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            log('Guardado: ' + agent.name);
+            closeEditAgentModal();
+            renderAgents();
+            saveData();
         }
-        log('Guardado: ' + agent.name);
-        closeEditAgentModal();
-        renderAgents();
-        saveData();
     }
 }
 

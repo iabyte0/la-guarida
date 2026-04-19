@@ -1,94 +1,105 @@
-/* RESPONSIVE CSS - Mobile Fixed v2 */
+/* RESPONSIVE CSS - Mobile Complete Override v3 */
 @media (max-width: 480px) {
-    * {
-        box-sizing: border-box;
-    }
-    
+    /* Force override for mobile */
     html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        overflow-x: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
     }
     
     .app-container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        overflow-y: auto !important;
     }
     
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        z-index: 1000;
-        background: #0a0a0f;
-        border-bottom: 1px solid #00ff88;
-        padding: 5px 8px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+    /* Header - compact top */
+    header.header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 35px !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background: #0a0a0f !important;
+        padding: 2px 8px !important;
+        border-bottom: 1px solid #00ff88 !important;
     }
     
     .logo h1 {
-        font-size: 0.9rem;
-        margin: 0;
+        font-size: 0.8rem !important;
+        margin: 0 !important;
+    }
+    
+    .version {
+        display: none;
     }
     
     .header-stats {
-        display: none;
+        display: none !important;
     }
     
     .header-right {
-        display: flex;
-        align-items: center;
-        gap: 5px;
+        display: flex !important;
+        gap: 5px !important;
+        align-items: center !important;
     }
     
-    .nav-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        background: #0a0a0f;
-        border-top: 2px solid #00ff88;
-        padding: 5px 2px;
-        z-index: 1001;
+    .clock, .date {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Nav - fixed bottom */
+    nav.nav-bar {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 40px !important;
+        z-index: 9998 !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: #0a0a0f !important;
+        border-top: 1px solid #00ff88 !important;
+        overflow-x: auto !important;
     }
     
     .nav-link {
-        font-size: 0.55rem;
-        padding: 3px;
-        text-decoration: none;
+        font-size: 0.5rem !important;
+        padding: 2px !important;
+        flex: 1 !important;
+        text-align: center !important;
     }
     
-    .main-content {
-        flex: 1;
-        margin-top: 40px;
-        margin-bottom: 40px;
-        padding: 8px;
+    /* Main content */
+    .main-grid {
+        margin-top: 35px !important;
+        margin-bottom: 40px !important;
+        padding: 8px !important;
+        width: 100% !important;
+        display: block !important;
     }
     
+    /* Panels */
     .panel {
-        display: none;
-        width: 100%;
+        display: none !important;
+        width: 100% !important;
+        padding: 0 !important;
     }
     
     .panel.active-panel {
-        display: block;
-        width: 100%;
+        display: block !important;
+        width: 100% !important;
     }
     
     .control-panel,
@@ -96,46 +107,67 @@
     .kanban-panel,
     .stats-panel,
     .pomodoro-panel,
-    .calendar-panel {
-        width: 100%;
+    .calendar-panel,
+    .files-panel,
+    .logs-panel {
+        display: none !important;
+        width: 100% !important;
     }
     
-    .stats-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+    .control-panel.active-panel,
+    .agents-panel.active-panel,
+    .kanban-panel.active-panel,
+    .stats-panel.active-panel,
+    .pomodoro-panel.active-panel,
+    .calendar-panel.active-panel,
+    .files-panel.active-panel,
+    .logs-panel.active-panel {
+        display: block !important;
+        width: 100% !important;
     }
     
-    .stat-card {
-        padding: 8px;
+    .panel-header {
+        flex-wrap: wrap;
+        gap: 5px;
     }
     
-    .stat-value {
+    .panel-header h2 {
         font-size: 0.9rem;
     }
     
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 5px !important;
+    }
+    
+    .stat-card {
+        padding: 5px !important;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+    }
+    
+    .stat-value {
+        font-size: 0.8rem;
+    }
+    
+    /* Agents */
     .agents-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr !important;
+        gap: 5px !important;
     }
     
+    /* Kanban */
     .kanban-board {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr !important;
     }
     
+    /* Modal */
     .modal-content {
         width: 95% !important;
-        margin: 5px !important;
-        left: 2.5% !important;
-        top: 5% !important;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .nav-bar {
-        width: 120px;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
     }
 }

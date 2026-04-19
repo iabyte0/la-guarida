@@ -4,14 +4,14 @@
 /* VARIABLES Y FUNDAMENTOS */
 /* ════════════════════════════════════════════════════════════════ */
 :root {
-    --bg-primary: #0a0e17;
-    --bg-secondary: #111827;
-    --bg-panel: #1a1f2e;
-    --bg-card: #242938;
-    --bg-card-hover: #2d3348;
+    --bg-primary: #030308;
+    --bg-secondary: #050508;
+    --bg-panel: #08080c;
+    --bg-card: #0c0c10;
+    --bg-card-hover: #101018;
     
-    --accent-primary: #00ff9d;
-    --accent-secondary: #00d4ff;
+    --accent-primary: #00ff88;
+    --accent-secondary: #00ddaa;
     --accent-tertiary: #ff00ff;
     --accent-warning: #ffaa00;
     --accent-danger: #ff4757;
@@ -1373,4 +1373,72 @@ body {
 
 .panel.active-panel {
     display: block;
+}
+/* MODERN FUTURISTIC STYLE v2 */
+body {
+    background: linear-gradient(135deg, #030308 0%, #050510 50%, #030308 100%);
+    min-height: 100vh;
+}
+
+.panel {
+    background: rgba(10,10,15,0.8);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.panel:hover {
+    border-color: rgba(0,255,136,0.3);
+}
+
+.agent-card, .business-card, .stat-card {
+    background: linear-gradient(145deg, #0c0c12, #08080c);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.agent-card:hover, .business-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0,255,136,0.4);
+    box-shadow: 0 8px 30px rgba(0,255,136,0.15);
+}
+
+.btn-neon {
+    background: linear-gradient(90deg, #00aa66, #00ff88);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-neon:hover {
+    box-shadow: 0 0 25px rgba(0,255,136,0.5);
+    transform: scale(1.02);
+}
+
+.nav-link.active {
+    background: linear-gradient(90deg, rgba(0,255,136,0.2), rgba(0,255,136,0.05));
+    border-left: 3px solid #00ff88;
+    color: #00ff88;
+}
+
+.stat-card {
+    background: linear-gradient(145deg, #0a0a10, #060608);
+}
+
+input, select, textarea {
+    background: rgba(20,20,25,0.8) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 8px;
+    color: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #00ff88 !important;
+    box-shadow: 0 0 15px rgba(0,255,136,0.3);
 }

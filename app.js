@@ -798,12 +798,14 @@ function openTab(tabId) {
     // Hide all panels
     document.querySelectorAll('.panel').forEach(function(p) { 
         p.style.display = 'none'; 
+        p.classList.remove('active-panel');
     });
     
     // Show selected tab
     var tab = document.getElementById(tabId);
     if (tab) {
         tab.style.display = 'block';
+        tab.classList.add('active-panel');
     }
     
     // Update nav

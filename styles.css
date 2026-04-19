@@ -1226,3 +1226,41 @@ body {
 .btn-icon:hover {
     opacity: 1;
 }
+
+.events-list {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.event-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.event-date {
+    font-size: 0.75rem;
+    color: var(--accent-secondary);
+    font-weight: 700;
+}
+
+.event-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 4px 0;
+}
+
+.event-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.event-assign {
+    font-size: 0.7rem;
+    margin-top: 6px;
+    color: var(--accent-primary);
+}

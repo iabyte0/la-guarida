@@ -75,7 +75,8 @@ function renderAgents() {
     if (!grid) return;
     grid.innerHTML = agents.map(function(a) {
         var statusClass = a.status === 'online' ? 'online' : 'offline';
-        return '<div class="agent-card"><div class="agent-avatar">' + a.avatar + '</div><div class="agent-info"><div class="agent-name">' + a.name + '</div><div class="agent-task">' + a.task + '</div><div class="agent-status ' + statusClass + '">' + (a.status === 'online' ? '🟢 Online' : '🔴 Offline') + '</div></div><div class="agent-actions"><button class="btn-small" onclick="editAgent(' + a.id + ')">✏️ Editar</button></div></div>';
+        var avatarHtml = a.avatar && a.avatar.startsWith('data:') ? '<img src="' + a.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">' : a.avatar;
+        return '<div class="agent-card"><div class="agent-avatar">' + avatarHtml + '</div><div class="agent-info"><div class="agent-name">' + a.name + '</div><div class="agent-task">' + a.task + '</div><div class="agent-status ' + statusClass + '">' + (a.status === 'online' ? '🟢 Online' : '🔴 Offline') + '</div></div><div class="agent-actions"><button class="btn-small" onclick="editAgent(' + a.id + ')">✏️ Editar</button></div></div>';
     }).join('');
     updateAgentCount();
 }
@@ -106,8 +107,8 @@ function handleAgentAvatarUpload(input, type) {
             var preview = document.getElementById(previewId);
             if (preview) { 
                 preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">'; 
-                preview.dataset.emoji = e.target.result; 
-                preview.dataset.type = 'image'; 
+                preview.dataset.image = e.target.result; 
+                preview.dataset.type = 'image';
             }
         };
         reader.readAsDataURL(file);
@@ -132,10 +133,17 @@ function editAgent(id) {
         document.getElementById('edit-agent-name').value = agent.name;
         document.getElementById('edit-agent-specialty').value = agent.specialty;
         document.getElementById('edit-agent-status').value = agent.status;
-        var img = document.getElementById('edit-agent-avatar-img');
-        if (img) {
-            img.src = agent.avatar && agent.avatar.startsWith('data:') ? agent.avatar : '';
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview) {
+            if (agent.avatar && agent.avatar.startsWith('data:')) {
+                preview.innerHTML = '<img src="' + agent.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">';
+                preview.dataset.image = agent.avatar;
+                preview.dataset.type = 'image';
+            } else {
+                preview.innerHTML = agent.avatar || '🦞';
+            }
         }
+        document.getElementById('edit-agent-avatar-upload').value = '';
         var modal = document.getElementById('edit-agent-modal');
         if (modal) modal.classList.add('show');
     }
@@ -151,23 +159,14 @@ function saveEditAgent() {
         agent.name = document.getElementById('edit-agent-name').value;
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
-        var fileInput = document.getElementById('edit-agent-avatar-upload');
-        if (fileInput && fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                agent.avatar = e.target.result;
-                log('Guardado: ' + agent.name);
-                closeEditAgentModal();
-                renderAgents();
-                saveData();
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        } else {
-            log('Guardado: ' + agent.name);
-            closeEditAgentModal();
-            renderAgents();
-            saveData();
+        var preview = document.getElementById('edit-agent-avatar-preview');
+        if (preview && preview.dataset.type === 'image' && preview.dataset.image) {
+            agent.avatar = preview.dataset.image;
         }
+        log('Guardado: ' + agent.name);
+        closeEditAgentModal();
+        renderAgents();
+        saveData();
     }
 }
 

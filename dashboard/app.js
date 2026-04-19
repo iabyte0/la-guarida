@@ -186,7 +186,7 @@ function addNewBusiness() {
     if (name) {
         businesses.push({ id: Date.now(), name: name, icon: '📦', sales: '0€', status: 'active' });
         renderBusinesses();
-    renderCalendarHeader();
+    initCalendarUI();
     renderMonthCalendar();
         saveData();
     }
@@ -445,6 +445,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderKanban();
     updateAgentCount();
     log('🎉 Dashboard LISTO!');
+    initCalendarUI();
+    renderMonthCalendar();
 });
 
 // EXPORTS
@@ -704,3 +706,61 @@ window.renderMonthCalendar = renderMonthCalendar;
 setTimeout(function() {
     renderCalendarHeader();
 }, 100);
+function initCalendarUI() {
+    var panel = document.querySelector("#calendario .panel-header");
+    if (panel) {
+        if (!document.getElementById('calendar-year')) {
+            var yearSelect = document.createElement("select");
+            yearSelect.id = "calendar-year";
+            yearSelect.className = "year-select";
+            yearSelect.onchange = function() {
+                currentYear = parseInt(this.value);
+                renderMonthCalendar();
+            };
+            for (var y = 2024; y <= 2040; y++) {
+                var opt = document.createElement("option");
+                opt.value = y;
+                opt.textContent = y;
+                if (y === currentYear) opt.selected = true;
+                yearSelect.appendChild(opt);
+            }
+            panel.insertBefore(yearSelect, panel.querySelector("button"));
+        }
+    }
+    
+    var tabs = document.querySelector(".calendar-tabs");
+    if (tabs && tabs.children.length === 0) {
+        var months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+        months.forEach(function(m, i) {
+            var tab = document.createElement("span");
+            tab.className = "cal-tab" + (i === currentMonth ? " active" : "");
+            tab.textContent = m;
+            tab.onclick = function() {
+                document.querySelectorAll(".cal-tab").forEach(function(t) { t.classList.remove("active"); });
+                this.classList.add("active");
+                currentMonth = i;
+                renderMonthCalendar();
+            };
+            tabs.appendChild(tab);
+        });
+    }
+    
+    renderMonthCalendar();
+}
+window.initCalendarUI = initCalendarUI;
+function switchMonth(m) {
+    currentMonth = m;
+    document.querySelectorAll('.cal-tab').forEach(function(t) { t.classList.remove('active'); });
+    if (document.querySelectorAll('.cal-tab')[m]) {
+        document.querySelectorAll('.cal-tab')[m].classList.add('active');
+    }
+    renderMonthCalendar();
+}
+
+function setYear(y) {
+    currentYear = y;
+    document.getElementById('calendar-year').value = y;
+    renderMonthCalendar();
+}
+window.switchMonth = switchMonth;
+window.setYear = setYear;

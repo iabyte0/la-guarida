@@ -445,6 +445,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderKanban();
     updateAgentCount();
     log('🎉 Dashboard LISTO!');
+    initCalendarUI();
+    renderMonthCalendar();
 });
 
 // EXPORTS
@@ -755,7 +757,7 @@ function switchMonth(m) {
     renderMonthCalendar();
 }
 
-function setYear(y) {
+function setYear(y) { if(typeof y==="string") y=parseInt(y);
     currentYear = y;
     document.getElementById('calendar-year').value = y;
     renderMonthCalendar();

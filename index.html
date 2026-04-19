@@ -501,5 +501,50 @@
             </div>
         </div>
     </div>
+<!-- MODAL EDITAR EVENTO -->
+    <div class="modal" id="edit-event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>EDITAR EVENTO</h2>
+                <span class="close-modal" onclick="closeEditEventModal()">X</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-event-id">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="edit-event-title" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="edit-event-desc" class="form-input" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="edit-event-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" id="edit-event-time" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Asignado a</label>
+                    <select id="edit-event-assign" class="form-input">
+                        <option value="Jeremy">Jeremy</option>
+                        <option value="Hanzo">Hanzo</option>
+                        <option value="Claude">Claude</option>
+                        <option value="Codex">Codex</option>
+                        <option value="Gemini">Gemini</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditEvent()">GUARDAR</button>
+                    <button class="btn-small" onclick="deleteEvent(parseInt(document.getElementById('edit-event-id').value))">ELIMINAR</button>
+                    <button class="btn-small" onclick="closeEditEventModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

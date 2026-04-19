@@ -186,6 +186,8 @@ function addNewBusiness() {
     if (name) {
         businesses.push({ id: Date.now(), name: name, icon: '📦', sales: '0€', status: 'active' });
         renderBusinesses();
+    renderCalendarHeader();
+    renderMonthCalendar();
         saveData();
     }
 }
@@ -602,3 +604,103 @@ window.openEventDetails = openEventDetails;
 window.saveEditEvent = saveEditEvent;
 window.closeEditEventModal = closeEditEventModal;
 window.deleteEvent = deleteEvent;
+var currentYear = new Date().getFullYear();
+var currentMonth = new Date().getMonth();
+
+function renderCalendarHeader() {
+    var yearSelect = document.getElementById('calendar-year');
+    var monthTabs = document.querySelector('.calendar-tabs');
+    
+    if (yearSelect) {
+        yearSelect.innerHTML = '';
+        for (var y = 2024; y <= 2030; y++) {
+            var opt = document.createElement('option');
+            opt.value = y;
+            opt.textContent = y;
+            if (y === currentYear) opt.selected = true;
+            yearSelect.appendChild(opt);
+        }
+        yearSelect.onchange = function() {
+            currentYear = parseInt(this.value);
+            renderMonthCalendar();
+        };
+    }
+    
+    if (monthTabs) {
+        var monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        monthTabs.innerHTML = '';
+        monthNames.forEach(function(m, idx) {
+            var tab = document.createElement('span');
+            tab.className = 'cal-tab' + (idx === currentMonth ? ' active' : '');
+            tab.textContent = m;
+            tab.onclick = function() {
+                document.querySelectorAll('.cal-tab').forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+                currentMonth = idx;
+                renderMonthCalendar();
+            };
+            monthTabs.appendChild(tab);
+        });
+    }
+}
+
+function renderMonthCalendar() {
+    var calDays = document.querySelector('.cal-days');
+    if (!calDays) return;
+    
+    var firstDay = new Date(currentYear, currentMonth, 1).getDay() || 7;
+    var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+    calDays.innerHTML = '';
+    
+    // Días vacíos al inicio
+    for (var i = 1; i < firstDay; i++) {
+        var empty = document.createElement('span');
+        empty.className = 'cal-day';
+        calDays.appendChild(empty);
+    }
+    
+    // Días del mes
+    for (var d = 1; d <= daysInMonth; d++) {
+        var dayEl = document.createElement('span');
+        dayEl.className = 'cal-day';
+        dayEl.textContent = d;
+        dayEl.dataset.date = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        
+        // Buscar eventos de este día
+        var dayEvents = events.filter(function(e) {
+            if (!e.date) return false;
+            var parts = e.date.split('-');
+            return parseInt(parts[0]) === currentYear && 
+                   parseInt(parts[1]) === currentMonth + 1 && 
+                   parseInt(parts[2]) === d;
+        });
+        
+        if (dayEvents.length > 0) {
+            dayEl.classList.add('has-event');
+            dayEvents.forEach(function(ev) {
+                var eventBadge = document.createElement('div');
+                eventBadge.className = 'calendar-event';
+                eventBadge.innerHTML = (ev.time || '') + ' ' + ev.title;
+                eventBadge.onclick = function(e) {
+                    e.stopPropagation();
+                    openEventDetails(ev.id);
+                };
+                dayEl.appendChild(eventBadge);
+            });
+        }
+        
+        // Hoy
+        var today = new Date();
+        if (d === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+            dayEl.classList.add('today');
+        }
+        
+        calDays.appendChild(dayEl);
+    }
+}
+window.renderCalendarHeader = renderCalendarHeader;
+window.renderMonthCalendar = renderMonthCalendar;
+setTimeout(function() {
+    renderCalendarHeader();
+}, 100);

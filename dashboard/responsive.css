@@ -1,0 +1,198 @@
+/* RESPONSIVE CSS - Añadir al final de styles.css */
+
+/* Mobile small */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        flex-direction: row;
+        padding: 5px;
+        z-index: 1000;
+        overflow-x: auto;
+    }
+    
+    .sidebar-logo {
+        display: none;
+    }
+    
+    .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 8px 4px;
+    }
+    
+    .nav-link {
+        font-size: 0.65rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        margin-bottom: 60px;
+        padding: 10px;
+        padding-bottom: 80px;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .clock {
+        font-size: 1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 10px;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .agents-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .agent-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .kanban-board {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .kanban-column {
+        min-height: 150px;
+    }
+    
+    .kanban-task {
+        padding: 8px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    .form-input {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .btn-neon {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .calendar-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .calendar-controls {
+        justify-content: center;
+    }
+    
+    .calendar-grid {
+        font-size: 0.8rem;
+    }
+    
+    .pomodoro-timer {
+        font-size: 3rem;
+    }
+    
+    .pomodoro-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .log-container {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    .sidebar {
+        width: 180px;
+    }
+    
+    .main-content {
+        margin-left: 180px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .kanban-board {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .modal-content {
+        width: 85%;
+    }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .sidebar {
+        width: 100%;
+        height: 50px;
+        position: fixed;
+        bottom: 0;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .main-content {
+        margin-bottom: 50px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+    .logo h1 {
+        font-size: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+    
+    .btn-neon {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

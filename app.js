@@ -75,7 +75,8 @@ function renderAgents() {
     if (!grid) return;
     grid.innerHTML = agents.map(function(a) {
         var statusClass = a.status === 'online' ? 'online' : 'offline';
-        return '<div class="agent-card"><div class="agent-avatar">' + a.avatar + '</div><div class="agent-info"><div class="agent-name">' + a.name + '</div><div class="agent-task">' + a.task + '</div><div class="agent-status ' + statusClass + '">' + (a.status === 'online' ? '🟢 Online' : '🔴 Offline') + '</div></div><div class="agent-actions"><button class="btn-small" onclick="editAgent(' + a.id + ')">✏️ Editar</button></div></div>';
+        var avatarHtml = a.avatar && a.avatar.startsWith('data:') ? '<img src="' + a.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">' : a.avatar;
+        return '<div class="agent-card"><div class="agent-avatar">' + avatarHtml + '</div><div class="agent-info"><div class="agent-name">' + a.name + '</div><div class="agent-task">' + a.task + '</div><div class="agent-status ' + statusClass + '">' + (a.status === 'online' ? '🟢 Online' : '🔴 Offline') + '</div></div><div class="agent-actions"><button class="btn-small" onclick="editAgent(' + a.id + ')">✏️ Editar</button></div></div>';
     }).join('');
     updateAgentCount();
 }

@@ -34,11 +34,18 @@
                 </div>
             </div>
             <div class="header-right">
+                <button class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <button class="btn-small" onclick="saveData(); alert('💾 Guardado!')">💾</button>
                 <div class="clock" id="clock">--:--</div>
                 <div class="date" id="date">--</div>
             </div>
         </header>
+
+        <div class="nav-overlay" id="nav-overlay" onclick="toggleMenu()"></div>
 
         <nav class="nav-bar">
             <a class="nav-link active" onclick="openTab('panel')">🏠 Panel</a>

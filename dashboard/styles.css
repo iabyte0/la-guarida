@@ -1324,3 +1324,53 @@ body {
 .event-time {
     margin-right: 3px;
 }
+
+/* SIDEBAR NAV */
+.nav-bar {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    min-width: 160px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #0f1419;
+    border-right: 2px solid #00ff9d;
+    padding: 15px 8px;
+    z-index: 100;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 12px;
+    margin: 3px 0;
+    color: #9ca3af;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    transition: all 0.15s;
+}
+
+.nav-link:hover {
+    background: #1f2937;
+    color: #fff;
+}
+
+.nav-link.active {
+    background: rgba(0, 255, 157, 0.15);
+    color: #00ff9d;
+    border-left: 3px solid #00ff9d;
+}
+
+.panel {
+    display: none;
+    margin-left: 170px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+
+.panel.active-panel {
+    display: block;
+}

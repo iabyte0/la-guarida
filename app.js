@@ -764,3 +764,52 @@ function setYear(y) { if(typeof y==="string") y=parseInt(y);
 }
 window.switchMonth = switchMonth;
 window.setYear = setYear;
+// Tab Manager for Dashboard v3.1
+var openTabs = ['panel'];
+
+function openTab(tabId) {
+    // Hide all panels
+    document.querySelectorAll('.panel').forEach(function(p) { 
+        p.style.display = 'none'; 
+    });
+    
+    // Show selected tab
+    var tab = document.getElementById(tabId);
+    if (tab) {
+        tab.style.display = 'block';
+    }
+    
+    // Update nav
+    document.querySelectorAll('.nav-link').forEach(function(l) { 
+        l.classList.remove('active'); 
+    });
+    
+    // Find and activate nav link
+    var navLinks = document.querySelectorAll('.nav-link');
+    var tabIndex = ['panel', 'agentes', 'kanban', 'stats', 'pomodoro', 'calendario', 'archivos', 'logs'].indexOf(tabId);
+    if (navLinks[tabIndex]) {
+        navLinks[tabIndex].classList.add('active');
+    }
+    
+    // Don't add to openTabs - we replace current view
+}
+
+function initTabSystem() {
+    // Hide all panels initially except first one
+    document.querySelectorAll('.panel').forEach(function(p, i) {
+        if (p.id !== 'panel') {
+            p.style.display = 'none';
+        }
+    });
+    
+    // Update nav to use tabs
+    document.querySelectorAll('.nav-link').forEach(function(link, i) {
+        var tabIds = ['panel', 'agentes', 'kanban', 'stats', 'pomodoro', 'calendario', 'archivos', 'logs'];
+        link.onclick = function() {
+            openTab(tabIds[i]);
+        };
+    });
+}
+window.openTab=openTab;
+window.initTabSystem=initTabSystem;
+initTabSystem();

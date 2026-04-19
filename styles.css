@@ -1292,3 +1292,35 @@ body {
     border-radius: 50%;
     z-index: 10;
 }
+.cal-day.has-event {
+    background: rgba(0, 255, 157, 0.15);
+    border-color: var(--accent-primary);
+}
+
+.calendar-event {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    background: var(--accent-primary);
+    color: #000;
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.calendar-event:hover {
+    background: var(--accent-secondary);
+    white-space: normal;
+    z-index: 10;
+}
+
+.event-time {
+    margin-right: 3px;
+}

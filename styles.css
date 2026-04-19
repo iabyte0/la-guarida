@@ -1264,3 +1264,31 @@ body {
     margin-top: 6px;
     color: var(--accent-primary);
 }
+.cal-day.has-event {
+    background: rgba(0, 255, 157, 0.3);
+    border-color: var(--accent-primary);
+}
+
+.cal-day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+}
+
+.event-dot {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    z-index: 10;
+}

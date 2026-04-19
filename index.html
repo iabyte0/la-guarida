@@ -475,7 +475,7 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=32"></script>
 <!-- MODAL EVENTO -->
     <div class="modal" id="event-modal">
         <div class="modal-content">
@@ -564,5 +564,41 @@
             </div>
         </div>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide all panels first
+    document.querySelectorAll('.panel').forEach(function(p) {
+        p.style.display = 'none';
+    });
+    // Show first panel only
+    var firstPanel = document.querySelector('.panel');
+    if (firstPanel) {
+        firstPanel.style.display = 'block';
+    }
+    
+    // Setup nav clicks
+    var navLinks = document.querySelectorAll('.nav-link');
+    var panels = ['panel','agentes','kanban','stats','pomodoro','calendario','archivos','logs'];
+    
+    navLinks.forEach(function(link, i) {
+        link.onclick = function() {
+            // Hide all panels
+            document.querySelectorAll('.panel').forEach(function(p) {
+                p.style.display = 'none';
+            });
+            // Show selected
+            var tab = document.getElementById(panels[i]);
+            if (tab) {
+                tab.style.display = 'block';
+            }
+            // Update nav
+            navLinks.forEach(function(l) {
+                l.classList.remove('active');
+            });
+            link.classList.add('active');
+        };
+    });
+});
+</script>
 </body>
 </html>

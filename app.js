@@ -460,3 +460,10 @@ window.editTask = editTask;
 window.saveEditTask = saveEditTask;
 window.closeEditTaskModal = closeEditTaskModal;
 window.deleteTask = deleteTask;
+function renderEvents() {
+    var list = document.getElementById("events-list");
+    if (!list) return;
+    list.innerHTML = events.map(function(e) {
+        return '<div class="event-item"><div class="event-date">' + e.date + ' ' + e.time + '</div><div class="event-title">' + e.title + '</div>' + (e.description ? '<div class="event-desc">' + e.description + '</div>' : '') + '<div class="event-assign">' + e.assign + '</div></div>';
+    }).join('');
+}

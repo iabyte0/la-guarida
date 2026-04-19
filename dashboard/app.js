@@ -434,7 +434,6 @@ function createEventFromModal() {
     closeEventModal();
     renderEvents();
     renderCalendarWithEvents();
-    renderCalendarEvents();
     saveData();
 }
 function addNewFile() {

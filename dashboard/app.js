@@ -152,8 +152,12 @@ function saveEditAgent() {
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
         var preview = document.getElementById('edit-agent-avatar-preview');
-        if (preview && preview.dataset.type === 'image') {
-            agent.avatar = preview.dataset.emoji;
+        if (preview) {
+            if (preview.dataset.type === 'image') {
+                agent.avatar = preview.dataset.image || preview.src || '';
+            } else if (preview.textContent) {
+                agent.avatar = preview.textContent;
+            }
         }
         log('Guardado: ' + agent.name);
         closeEditAgentModal();

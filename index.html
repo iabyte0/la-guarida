@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦞 LA GUARIDA - Dashboard v3.0</title>
+    <!-- v3.2 --><title>🦞 LA GUARIDA - Dashboard v3.0</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="form_styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap">
@@ -41,14 +41,14 @@
         </header>
 
         <nav class="nav-bar">
-            <a class="nav-link active" onclick="navTo('panel')">🏠 Panel</a>
-            <a class="nav-link" onclick="navTo('agentes')">🛸 Agentes</a>
-            <a class="nav-link" onclick="navTo('kanban')">📋 Kanban</a>
-            <a class="nav-link" onclick="navTo('stats')">📊 Stats</a>
-            <a class="nav-link" onclick="navTo('pomodoro')">⏱️ Pomodoro</a>
-            <a class="nav-link" onclick="navTo('calendario')">📅 Calendario</a>
-            <a class="nav-link" onclick="navTo('archivos')">📁 Archivos</a>
-            <a class="nav-link" onclick="navTo('logs')">📺 Logs</a>
+            <a class="nav-link active" onclick="openTab('panel')">🏠 Panel</a>
+            <a class="nav-link" onclick="openTab('agentes')">🛸 Agentes</a>
+            <a class="nav-link" onclick="openTab('kanban')">📋 Kanban</a>
+            <a class="nav-link" onclick="openTab('stats')">📊 Stats</a>
+            <a class="nav-link" onclick="openTab('pomodoro')">⏱️ Pomodoro</a>
+            <a class="nav-link" onclick="openTab('calendario')">📅 Calendario</a>
+            <a class="nav-link" onclick="openTab('archivos')">📁 Archivos</a>
+            <a class="nav-link" onclick="openTab('logs')">📺 Logs</a>
         </nav>
 
         <main class="main-grid">

@@ -1442,3 +1442,44 @@ input:focus, select:focus, textarea:focus {
     border-color: #00ff88 !important;
     box-shadow: 0 0 15px rgba(0,255,136,0.3);
 }
+/* HEADER & LOGO */
+.header {
+    background: rgba(5,5,8,0.95);
+    border-bottom: 1px solid rgba(0,255,136,0.2);
+    padding: 15px 25px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 10px rgba(0,255,136,0.8));
+}
+
+.clock, .date {
+    font-family: 'JetBrains Mono', monospace;
+    color: #00ff88;
+    font-size: 0.9rem;
+}
+
+/* KANBAN IMPROVEMENTS */
+.kanban-column {
+    background: rgba(8,8,12,0.9);
+    border: 1px solid rgba(0,255,136,0.1);
+}
+
+.kanban-task {
+    background: linear-gradient(145deg, #0c0c14, #08080c);
+    border-left: 3px solid #00ff88;
+}
+
+.kanban-task-title {
+    color: #fff;
+    font-weight: 500;
+}

@@ -6,8 +6,6 @@
     <!-- v3.2 --><title>🦞 LA GUARIDA - Dashboard v3.0</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="form_styles.css">
-    <link rel="stylesheet" href="responsive.css?v=2">
-    <link rel="stylesheet" href="mobile.css?v=2">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
 </head>
@@ -36,18 +34,11 @@
                 </div>
             </div>
             <div class="header-right">
-                <button class="hamburger" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
                 <button class="btn-small" onclick="saveData(); alert('💾 Guardado!')">💾</button>
                 <div class="clock" id="clock">--:--</div>
                 <div class="date" id="date">--</div>
             </div>
         </header>
-        
-        <div class="nav-overlay" id="nav-overlay" onclick="toggleMenu()"></div>
 
         <nav class="nav-bar">
             <a class="nav-link active" onclick="openTab('panel')">🏠 Panel</a>

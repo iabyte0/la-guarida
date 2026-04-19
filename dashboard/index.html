@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦞 LA GUARIDA - Dashboard v3.0</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="form_styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700&display=swap">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <div class="bg-grid"></div>
+        <div class="bg-scanlines"></div>
+        
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon glow">🦞</span>
+                <h1>HANZO <span class="version">v3.0</span></h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-label">CONECTADO</span>
+                    <span class="stat-value online">●</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">AGENTES</span>
+                    <span class="stat-value" id="agent-count">4</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ENERGÍA</span>
+                    <span class="stat-value energy">⚡ 100%</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-small" onclick="saveData(); alert('💾 Guardado!')">💾</button>
+                <div class="clock" id="clock">--:--</div>
+                <div class="date" id="date">--</div>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a class="nav-link active" onclick="navTo('panel')">🏠 Panel</a>
+            <a class="nav-link" onclick="navTo('agentes')">🛸 Agentes</a>
+            <a class="nav-link" onclick="navTo('kanban')">📋 Kanban</a>
+            <a class="nav-link" onclick="navTo('stats')">📊 Stats</a>
+            <a class="nav-link" onclick="navTo('pomodoro')">⏱️ Pomodoro</a>
+            <a class="nav-link" onclick="navTo('calendario')">📅 Calendario</a>
+            <a class="nav-link" onclick="navTo('archivos')">📁 Archivos</a>
+            <a class="nav-link" onclick="navTo('logs')">📺 Logs</a>
+        </nav>
+
+        <main class="main-grid">
+            <section class="panel control-panel" id="panel">
+                <div class="panel-header">
+                    <h2>🎯 PANEL DE CONTROL</h2>
+                    <button class="btn-neon" onclick="addNewMission()">+ NUEVA MISIÓN</button>
+                </div>
+                <div class="panel-content">
+                    <div class="mission-active">
+                        <h3>MISIÓN ACTIVA</h3>
+                        <div class="mission-card">
+                            <div class="mission-name" id="current-mission">Dashboard v3.0 SUPREME</div>
+                            <div class="mission-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill glow" id="mission-progress" style="width: 85%">85%</div>
+                                </div>
+                                <div class="mission-stats">
+                                    <span>Agente: <strong id="mission-agent">🦞 Hanzo</strong></span>
+                                    <span>Inicio: <strong id="mission-start">09:00</strong></span>
+                                    <span>Tiempo: <strong id="mission-time">10h 42m</strong></span>
+                                </div>
+                            </div>
+                            <div class="mission-actions">
+                                <button class="btn-small" onclick="updateProgress()">📈 Subir %</button>
+                                <button class="btn-small" onclick="pauseMission()">⏸️ Pausar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="business-grid" id="business-grid"></div>
+                </div>
+            </section>
+
+            <section class="panel agents-panel" id="agentes">
+                <div class="panel-header">
+                    <h2>🛸 NAVE DE AGENTES</h2>
+                    <div class="header-actions">
+                        <button class="btn-neon" onclick="openAvatarEditor()">🎨 AVATARES</button>
+                        <button class="btn-neon" onclick="addNewAgent()">+ AGENTE</button>
+                    </div>
+                </div>
+                <div class="agents-grid" id="agents-grid"></div>
+            </section>
+        </main>
+
+        <section class="panel kanban-panel" id="kanban">
+            <div class="panel-header">
+                <h2>📋 TABLERO DE MISIONES</h2>
+                <button class="btn-neon" onclick="addNewTask()">+ NUEVA TAREA</button>
+            </div>
+            <div class="kanban-board" id="kanban-board"></div>
+        </section>
+
+        <section class="panel stats-panel" id="stats">
+            <div class="panel-header">
+                <h2>📊 CENTRO DE ESTADÍSTICAS</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-title">💰 VENTAS MES</div>
+                    <div class="stat-value">4.200€</div>
+                    <div class="stat-change positive">+12% vs mes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">📦 PEDIDOS</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-change">+3 hoy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">⚡ PRODUCTIVIDAD</div>
+                    <div class="stat-value">94%</div>
+                    <div class="stat-change positive">Excelente</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">⏱️ PROMEDIO DIA</div>
+                    <div class="stat-value">2.3h</div>
+                    <div class="stat-change">Tareas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">📋 TAREAS</div>
+                    <div class="stat-value">23</div>
+                    <div class="stat-change">18 completadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">🎯 META</div>
+                    <div class="stat-value">42%</div>
+                    <div class="stat-progress">
+                        <div class="progress-bar-small"><div class="progress-fill" style="width: 42%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h3>📈 PRODUCTIVIDAD 7 DÍAS</h3>
+                <div class="chart">
+                    <div class="chart-bar" style="height: 60%"><span>L</span></div>
+                    <div class="chart-bar" style="height: 80%"><span>M</span></div>
+                    <div class="chart-bar" style="height: 45%"><span>X</span></div>
+                    <div class="chart-bar" style="height: 95%"><span>J</span></div>
+                    <div class="chart-bar" style="height: 70%"><span>V</span></div>
+                    <div class="chart-bar" style="height: 55%"><span>S</span></div>
+                    <div class="chart-bar active" style="height: 85%"><span>D</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel pomodoro-panel" id="pomodoro">
+            <div class="panel-header">
+                <h2>⏱️ POMODORO</h2>
+            </div>
+            <div class="pomodoro-container">
+                <div class="pomodoro-timer" id="pomodoro-timer">
+                    <span class="timer-minutes">25</span>:<span class="timer-seconds">00</span>
+                </div>
+                <div class="pomodoro-controls">
+                    <button class="btn-pomo" onclick="startPomodoro()">▶ INICIAR</button>
+                    <button class="btn-pomo" onclick="pausePomodoro()">⏸ PAUSAR</button>
+                    <button class="btn-pomo" onclick="resetPomodoro()">🔄 RESET</button>
+                </div>
+                <div class="pomodoro-count">
+                    <span>POMODOROS HOY: </span>
+                    <span class="pomo-ratio">4/8</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel calendar-panel" id="calendario">
+            <div class="panel-header">
+                <h2>📅 CALENDARIO</h2>
+                <select id="calendar-year" class="year-select" onchange="setYear(this.value)">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                </select>
+                <button class="btn-neon" onclick="addNewEvent()">+ EVENTO</button>
+            </div>
+            <div class="calendar-tabs">
+                <span class="cal-tab" onclick="switchMonth(0)">Ene</span>
+                <span class="cal-tab" onclick="switchMonth(1)">Feb</span>
+                <span class="cal-tab" onclick="switchMonth(2)">Mar</span>
+                <span class="cal-tab" onclick="switchMonth(3)">Abr</span>
+                <span class="cal-tab" onclick="switchMonth(4)">Mayo</span>
+                <span class="cal-tab" onclick="switchMonth(5)">Jun</span>
+                <span class="cal-tab" onclick="switchMonth(6)">Jul</span>
+                <span class="cal-tab" onclick="switchMonth(7)">Ago</span>
+                <span class="cal-tab" onclick="switchMonth(8)">Sep</span>
+                <span class="cal-tab" onclick="switchMonth(9)">Oct</span>
+                <span class="cal-tab" onclick="switchMonth(10)">Nov</span>
+                <span class="cal-tab" onclick="switchMonth(11)">Dic</span>
+            </div>
+            <div class="events-list" id="events-list"></div>
+<div class="calendar-grid">
+                <div class="cal-header"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+                <div class="cal-days">
+                    <span class="cal-day"></span><span class="cal-day">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span><span class="cal-day">6</span>
+                    <span class="cal-day">7</span><span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span><span class="cal-day">13</span>
+                    <span class="cal-day">14</span><span class="cal-day">15</span><span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day today">18</span><span class="cal-day">19</span><span class="cal-day">20</span>
+                    <span class="cal-day">21</span><span class="cal-day">22</span><span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span><span class="cal-day">26</span><span class="cal-day">27</span>
+                    <span class="cal-day">28</span><span class="cal-day">29</span><span class="cal-day">30</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel files-panel" id="archivos">
+            <div class="panel-header">
+                <h2>📁 ARCHIVOS</h2>
+                <button class="btn-neon" onclick="addNewFile()">+ ARCHIVO</button>
+            </div>
+            <div class="files-grid">
+                <div class="folder">
+                    <div class="folder-header">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">Informes</span>
+                    </div>
+                </div>
+                <div class="folder">
+                    <div class="folder-header">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">Ubicore</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel logs-panel" id="logs">
+            <div class="panel-header">
+                <h2>📺 MONITOR EN VIVO</h2>
+            </div>
+            <div class="activity-log" id="activity-log"></div>
+        </section>
+    </div>
+
+    <!-- MODAL TAREA (FORMULARIO) -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 NUEVA TAREA</h2>
+                <span class="close-modal" onclick="closeTaskModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="task-title" placeholder="Titulo de la tarea" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="task-desc" placeholder="Descripcion" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Proyecto</label>
+                        <select id="task-project" class="form-input">
+                            <option value="General">General</option>
+                            <option value="Ubicore">Ubicore</option>
+                            <option value="Alberto Gil">Alberto Gil</option>
+                            <option value="Mineto">Mineto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="task-status" class="form-input">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="asignado">Asignado</option>
+                            <option value="progreso">En Progreso</option>
+                            <option value="terminado">Terminado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        <select id="task-priority" class="form-input">
+                            <option value="high">Alta</option>
+                            <option value="medium" selected>Media</option>
+                            <option value="low">Baja</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agente</label>
+                        <select id="task-agent" class="form-input">
+                            <option value="Hanzo">Hanzo</option>
+                            <option value="Claude">Claude</option>
+                            <option value="Codex">Codex</option>
+                            <option value="Gemini">Gemini</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="createTaskFromModal()">✓ CREAR</button>
+                    <button class="btn-small" onclick="closeTaskModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUEVO AGENTE -->
+    <div class="modal" id="agent-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛸 NUEVO AGENTE</h2>
+                <span class="close-modal" onclick="closeAgentModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="agent-name" placeholder="Nombre del agente" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <select id="agent-specialty" class="form-input">
+                        <option value="General">General</option>
+                        <option value="Analisis">Analisis</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Research">Research</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Avatar</label>
+                    <input type="file" id="agent-avatar-upload" accept="image/*" class="form-input" onchange="handleAgentAvatarUpload(this,'new')">
+                    <div class="emoji-grid" style="margin-top:10px;">
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🦞', 'new')">🦞</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🧠', 'new')">🧠</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('💻', 'new')">💻</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('⭐', 'new')">⭐</span>
+                        <span class="emoji-opt" onclick="selectAgentEmoji('🤖', 'new')">🤖</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="createAgentFromModal()">✓ CREAR</button>
+                    <button class="btn-small" onclick="closeAgentModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR AGENTE -->
+    <div class="modal" id="edit-agent-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ EDITAR AGENTE</h2>
+                <span class="close-modal" onclick="closeEditAgentModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-agent-id">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="edit-agent-name" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <select id="edit-agent-specialty" class="form-input">
+                        <option value="General">General</option>
+                        <option value="Analisis">Analisis</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Research">Research</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="edit-agent-status" class="form-input">
+                        <option value="online">🟢 Online</option>
+                        <option value="offline">🔴 Offline</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditAgent()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeEditAgentModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AVATAR EDITOR -->
+    <div class="modal" id="avatar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 AVATARES</h2>
+                <span class="close-modal" onclick="closeModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <div class="emoji-grid">
+                    <span class="emoji-opt" onclick="selectAvatar('🦞')">🦞</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🧠')">🧠</span>
+                    <span class="emoji-opt" onclick="selectAvatar('💻')">💻</span>
+                    <span class="emoji-opt" onclick="selectAvatar('⭐')">⭐</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🤖')">🤖</span>
+                    <span class="emoji-opt" onclick="selectAvatar('🐱')">🐱</span>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveAvatar()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR TAREA -->
+    <div class="modal" id="edit-task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ EDITAR TAREA</h2>
+                <span class="close-modal" onclick="closeEditTaskModal()">✕</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-task-id">
+                <input type="hidden" id="edit-task-col">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="edit-task-title" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="edit-task-desc" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Proyecto</label>
+                        <select id="edit-task-project" class="form-input">
+                            <option value="General">General</option>
+                            <option value="Ubicore">Ubicore</option>
+                            <option value="Alberto Gil">Alberto Gil</option>
+                            <option value="Mineto">Mineto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="edit-task-status" class="form-input">
+                            <option value="pendiente">📋 Pendiente</option>
+                            <option value="asignado">👤 Asignado</option>
+                            <option value="progreso">⚙️ Progreso</option>
+                            <option value="revision">🔍 Revision</option>
+                            <option value="testing">🧪 Testing</option>
+                            <option value="terminado">✅ Terminado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        <select id="edit-task-priority" class="form-input">
+                            <option value="high">🔴 Alta</option>
+                            <option value="medium">🟡 Media</option>
+                            <option value="low">🟢 Baja</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agente</label>
+                        <select id="edit-task-agent" class="form-input">
+                            <option value="Hanzo">🦞 Hanzo</option>
+                            <option value="Claude">🧠 Claude</option>
+                            <option value="Codex">💻 Codex</option>
+                            <option value="Gemini">⭐ Gemini</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditTask()">💾 GUARDAR</button>
+                    <button class="btn-small" onclick="closeEditTaskModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+<!-- MODAL EVENTO -->
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>NUEVO EVENTO</h2>
+                <span class="close-modal" onclick="closeEventModal()">X</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="event-title" class="form-input" placeholder="Titulo del evento">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="event-desc" class="form-input" rows="2" placeholder="Descripcion"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="event-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" id="event-time" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Asignado a</label>
+                    <select id="event-assign" class="form-input">
+                        <option value="Jeremy">Jeremy</option>
+                        <option value="Hanzo">Hanzo</option>
+                        <option value="Claude">Claude</option>
+                        <option value="Codex">Codex</option>
+                        <option value="Gemini">Gemini</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="createEventFromModal()">CREAR</button>
+                    <button class="btn-small" onclick="closeEventModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- MODAL EDITAR EVENTO -->
+    <div class="modal" id="edit-event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>EDITAR EVENTO</h2>
+                <span class="close-modal" onclick="closeEditEventModal()">X</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-event-id">
+                <div class="form-group">
+                    <label>Titulo</label>
+                    <input type="text" id="edit-event-title" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea id="edit-event-desc" class="form-input" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" id="edit-event-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Hora</label>
+                        <input type="time" id="edit-event-time" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Asignado a</label>
+                    <select id="edit-event-assign" class="form-input">
+                        <option value="Jeremy">Jeremy</option>
+                        <option value="Hanzo">Hanzo</option>
+                        <option value="Claude">Claude</option>
+                        <option value="Codex">Codex</option>
+                        <option value="Gemini">Gemini</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-neon" onclick="saveEditEvent()">GUARDAR</button>
+                    <button class="btn-small" onclick="deleteEvent(parseInt(document.getElementById('edit-event-id').value))">ELIMINAR</button>
+                    <button class="btn-small" onclick="closeEditEventModal()">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

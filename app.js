@@ -794,7 +794,28 @@ window.setYear = setYear;
 // Tab Manager for Dashboard v3.1
 var openTabs = ['panel'];
 
+function toggleMenu() {
+    var nav = document.querySelector('.nav-bar');
+    var btn = document.querySelector('.hamburger');
+    var overlay = document.getElementById('nav-overlay');
+    
+    if (nav) {
+        nav.classList.toggle('open');
+    }
+    
+    if (btn) {
+        btn.classList.toggle('active');
+    }
+    
+    if (overlay) {
+        overlay.classList.toggle('open');
+    }
+}
+
 function openTab(tabId) {
+    // Close menu when opening a tab
+    toggleMenu();
+
     // Hide all panels
     document.querySelectorAll('.panel').forEach(function(p) { 
         p.style.display = 'none'; 

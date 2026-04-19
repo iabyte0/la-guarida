@@ -10,6 +10,8 @@ var agents = [
 ];
 var businesses = [{ id: 'ubicore', name: 'Ubicore', icon: '📦', sales: '4.2K€', orders: 12, status: 'active' }];
 var currentMission = { name: 'Dashboard v3.0 SUPREME', progress: 85, startTime: '09:00', elapsed: '10h 42m', agent: '🦞 Hanzo' };
+var events = [];
+
 var kanbanTasks = {
     pendiente: [{ id: 1, title: 'Terminar modulo Calendario', priority: 'high', type: 'mision', agent: 'Hanzo' }],
     asignado: [],
@@ -438,6 +440,9 @@ window.startPomodoro = startPomodoro;
 window.pausePomodoro = pausePomodoro;
 window.resetPomodoro = resetPomodoro;
 window.addNewEvent = addNewEvent;
+window.closeEventModal = closeEventModal;
+window.createEventFromModal = createEventFromModal;
+window.renderEvents = renderEvents;
 window.addNewFile = addNewFile;
 window.saveData = saveData;
 window.closeTaskModal = closeTaskModal;

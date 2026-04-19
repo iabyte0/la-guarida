@@ -417,6 +417,8 @@ function createEventFromModal() {
     log('Event creado: ' + title);
     closeEventModal();
     renderEvents();
+    addCalendarEventDots();
+    renderCalendarEvents();
     saveData();
 }
 function addNewFile() {
@@ -490,3 +492,36 @@ function renderEvents() {
         return '<div class="event-item"><div class="event-date">' + e.date + ' ' + e.time + '</div><div class="event-title">' + e.title + '</div>' + (e.description ? '<div class="event-desc">' + e.description + '</div>' : '') + '<div class="event-assign">' + e.assign + '</div></div>';
     }).join('');
 }
+function ADD_CALENDAR_DOTS() {
+    events.forEach(function(e) {
+        if (!e.date) return;
+        var dayEl = document.querySelector('.cal-day[data-date="' + e.date + '"]');
+        if (!dayEl) {
+            var dayNum = parseInt(e.date.split('-')[2]);
+            var daySelectors = document.querySelectorAll('.cal-day');
+            var today = new Date();
+            var firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay() || 7;
+            dayEl = daySelectors[dayNum + firstDay - 1];
+        }
+        if (dayEl) {
+            dayEl.classList.add('has-event');
+            var eventDot = document.createElement('div');
+            eventDot.className = 'event-dot';
+            eventDot.title = e.title;
+            dayEl.appendChild(eventDot);
+        }
+    });
+}
+window.renderCalendarEvents = renderCalendarEvents;
+function addCalendarEventDots() {
+    var dayElements = document.querySelectorAll('.cal-day');
+    events.forEach(function(e) {
+        if (!e.date) return;
+        var dateParts = e.date.split('-');
+        var day = parseInt(dateParts[2]);
+        if (day >= 1 && day <= 30 && dayElements[day]) {
+            dayElements[day].classList.add('has-event');
+        }
+    });
+}
+window.addCalendarEventDots = addCalendarEventDots;

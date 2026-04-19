@@ -75,7 +75,7 @@ function renderAgents() {
     if (!grid) return;
     grid.innerHTML = agents.map(function(a) {
         var statusClass = a.status === 'online' ? 'online' : 'offline';
-        var avatarHtml = a.avatar && a.avatar.startsWith('data:') ? '<img src="' + a.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">' : a.avatar;
+        var avatarHtml = (a.avatar && (a.avatar.indexOf('data:image') === 0 || a.avatar.indexOf('data:') === 0)) ? '<img src="' + a.avatar + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">' : a.avatar;
         return '<div class="agent-card"><div class="agent-avatar">' + avatarHtml + '</div><div class="agent-info"><div class="agent-name">' + a.name + '</div><div class="agent-task">' + a.task + '</div><div class="agent-status ' + statusClass + '">' + (a.status === 'online' ? '🟢 Online' : '🔴 Offline') + '</div></div><div class="agent-actions"><button class="btn-small" onclick="editAgent(' + a.id + ')">✏️ Editar</button></div></div>';
     }).join('');
     updateAgentCount();
@@ -160,8 +160,14 @@ function saveEditAgent() {
         agent.specialty = document.getElementById('edit-agent-specialty').value;
         agent.status = document.getElementById('edit-agent-status').value;
         var preview = document.getElementById('edit-agent-avatar-preview');
-        if (preview && preview.dataset.type === 'image' && preview.dataset.image) {
-            agent.avatar = preview.dataset.image;
+        if (preview) {
+            var isImg = preview.querySelector('img');
+            if (isImg) {
+                agent.avatar = isImg.src;
+                log('Imagen guardada: ' + agent.avatar.substring(0, 50) + '...');
+            } else if (preview.textContent) {
+                agent.avatar = preview.textContent;
+            }
         }
         log('Guardado: ' + agent.name);
         closeEditAgentModal();

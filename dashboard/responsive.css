@@ -1,192 +1,161 @@
-/* RESPONSIVE CSS - Mobile Optimized */
-
-/* Mobile small (max 480px) */
+/* RESPONSIVE CSS - Mobile Fixed */
 @media (max-width: 480px) {
-    body {
+    * {
+        box-sizing: border-box;
+    }
+    
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100vw;
         overflow-x: hidden;
     }
     
-    .sidebar {
-        width: 100% !important;
-        height: auto !important;
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        top: auto !important;
-        flex-direction: row !important;
-        padding: 5px !important;
-        z-index: 1000;
+    .app-container {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .header {
+        width: 100%;
+        max-width: 100vw;
+        flex-wrap: wrap;
+        padding: 8px 5px;
+        gap: 5px;
+    }
+    
+    .logo h1 {
+        font-size: 1rem;
+    }
+    
+    .nav-bar {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        background: rgba(10, 10, 15, 0.98);
+        border-top: 2px solid #00ff88;
+        padding: 5px 2px;
+        z-index: 9999;
         overflow-x: auto;
     }
     
-    .sidebar-logo {
-        display: none !important;
-    }
-    
-    .nav-item {
+    .nav-link {
+        font-size: 0.6rem;
+        padding: 5px 3px;
         flex: 1;
         text-align: center;
-        padding: 8px 4px;
+        white-space: nowrap;
     }
     
-    .nav-link {
-        font-size: 0.65rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2px;
+    .panel {
+        display: none;
+        width: 100%;
+        padding: 10px 5px;
+        padding-bottom: 60px;
     }
     
-    .main-content {
-        margin-left: 0 !important;
-        margin-bottom: 70px !important;
-        padding: 10px !important;
-        width: 100% !important;
+    .panel.active-panel {
+        display: block;
     }
     
-    header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .section {
-        overflow-x: hidden;
+    .control-panel,
+    .agents-panel,
+    .kanban-panel,
+    .stats-panel,
+    .pomodoro-panel,
+    .calendar-panel {
+        width: 100%;
+        max-width: 100vw;
     }
     
     .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
     
     .stat-card {
-        padding: 10px;
+        padding: 8px;
     }
     
     .stat-value {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     .agents-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .agent-card {
-        flex-direction: column;
-        text-align: center;
+        gap: 8px;
     }
     
     .kanban-board {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
     }
     
     .kanban-column {
-        min-height: 150px;
+        min-height: 100px;
     }
     
     .modal-content {
         width: 95% !important;
-        padding: 10px;
-        margin: 10px;
+        margin: 5px !important;
         left: 2.5% !important;
         top: 5% !important;
-    }
-    
-    .form-group {
-        margin-bottom: 10px;
+        padding: 10px !important;
     }
     
     .form-input {
         padding: 8px;
         font-size: 14px;
+        width: 100%;
+    }
+    
+    .form-group {
+        margin-bottom: 8px;
     }
     
     .btn-neon {
-        padding: 10px 15px;
-        font-size: 14px;
+        padding: 10px 12px;
+        font-size: 12px;
+        width: 100%;
     }
     
-    .calendar-header {
-        flex-direction: column;
-        gap: 10px;
+    .year-select {
+        font-size: 12px;
     }
     
-    .calendar-controls {
-        justify-content: center;
+    .calendar-grid {
+        font-size: 0.7rem;
     }
     
     .pomodoro-timer {
-        font-size: 3rem;
-    }
-    
-    .files-grid {
-        grid-template-columns: 1fr;
+        font-size: 2.5rem;
     }
     
     .log-container {
-        font-size: 0.75rem;
-        padding: 8px;
+        font-size: 0.7rem;
     }
 }
 
-/* Tablet */
 @media (min-width: 481px) and (max-width: 768px) {
-    .sidebar {
-        width: 140px !important;
-    }
-    
-    .main-content {
-        margin-left: 140px !important;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .kanban-board {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .modal-content {
-        width: 85%;
+    .nav-bar {
+        width: 120px;
     }
 }
 
-/* Landscape mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-    .sidebar {
-        width: 100%;
-        height: 50px !important;
-        position: fixed;
-        bottom: 0;
-        flex-direction: row;
-        overflow-x: auto;
+@media (max-height: 450px) and (orientation: landscape) {
+    .nav-bar {
+        height: 40px;
+        padding: 2px;
     }
     
-    .main-content {
-        margin-bottom: 50px !important;
-    }
-}
-
-/* Fixes */
-@media (max-width: 480px) {
-    #agents-section,
-    #kanban-section,
-    #calendar-section,
-    #pomodoro-section,
-    #files-section,
-    #logs-section {
-        display: none;
-    }
-    
-    #agents-section.active-panel,
-    #kanban-section.active-panel,
-    #calendar-section.active-panel,
-    #pomodoro-section.active-panel,
-    #files-section.active-panel,
-    #logs-section.active-panel {
-        display: block;
+    .nav-link {
+        font-size: 0.55rem;
+        padding: 2px;
     }
 }
